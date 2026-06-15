@@ -490,6 +490,117 @@ body {
 
 .start-btn:hover { background: #ff5ab6; }
 
+/* -- SPEAKER WAARSCHUWING -- */
+.speaker-warning {
+  display: none;
+  position: absolute;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 38;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background: #fff3cd;
+  border: 2px solid #e8a000;
+  border-radius: 14px;
+  padding: 10px 18px 10px 10px;
+  box-shadow: 0 4px 16px rgba(232, 160, 0, 0.25);
+  animation: speakerDrop 0.35s ease;
+  min-width: 280px;
+  max-width: 420px;
+}
+
+@keyframes speakerDrop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.speaker-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: speakerShake 0.4s ease 0.1s;
+}
+
+@keyframes speakerShake {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-10deg); }
+  75%       { transform: rotate(10deg); }
+}
+
+.speaker-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.speaker-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #e8a000;
+  letter-spacing: 0.5px;
+}
+
+.speaker-msg {
+  font-size: 11px;
+  color: #5a3e00;
+  line-height: 1.5;
+}
+
+/* -- PAPIER NOTITIE -- */
+.paper-note {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  z-index: 30;
+  width: 170px;
+  animation: paperSlideIn 0.3s ease;
+}
+
+@keyframes paperSlideIn {
+  from { opacity: 0; transform: translateX(20px) rotate(3deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(2deg); }
+}
+
+.paper-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.paper-content {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 72%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+
+.paper-title {
+  font-size: 10px;
+  font-weight: 900;
+  color: #8b6914;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #c8a96e;
+  padding-bottom: 3px;
+  margin-bottom: 2px;
+}
+
+.paper-body {
+  font-size: 9px;
+  color: #4a3000;
+  line-height: 1.8;
+  font-family: 'Jua', sans-serif;
+}
+
 /* -- MANAGER REACTIE BUBBEL -- */
 .manager-bubble {
   display: none;

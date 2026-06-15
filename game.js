@@ -125,6 +125,8 @@ function loadCustomer() {
   G.outfit = {};
   document.getElementById('wardrobePanel').style.display = 'none';
   document.getElementById('managerBubble').style.display = 'none';
+  document.getElementById('speakerWarning').style.display = 'none';
+  hidePaperNote();
   showScene(0);
 }
 
@@ -140,8 +142,10 @@ function showScene(idx) {
   if (sc.wardrobe) {
     document.getElementById('wardrobePanel').style.display = 'block';
     renderWardrobe();
+    showPaperNote(c);
   } else {
     document.getElementById('wardrobePanel').style.display = 'none';
+    hidePaperNote();
   }
   typeText(sc.text, () => {
     if (!sc.wardrobe) {
@@ -220,7 +224,9 @@ function submitOutfit() {
     ]
   };
   const txt = lines[reaction][Math.floor(Math.random() * 2)];
+  hidePaperNote();
   if (earned > 0) showFeedback('+' + earned + ' coins!', '#ffd700');
+  if (reaction === 'slecht') setTimeout(() => showSpeakerWarning(), 600);
   setTimeout(() => showManagerReaction(reaction), 800);
   typeText(txt, () => {
     const btn = document.createElement('button');
@@ -311,6 +317,45 @@ function closeTutorial() {
 }
 
 let bubbleTimer = null;
+let speakerTimer = null;
+
+const SPEAKER_WARNINGS = [
+  'Deze klant was niet blij. Lees de wensen goed en kies items die bij de stijl passen!',
+  'Oeps! De outfit matcht niet. Kijk naar de stijltags van de klant voor een betere keuze.',
+  'Slechte verkoop! Probeer tags zoals "retro", "glamour" of "kawaii" goed te combineren.',
+  'De klant vertrok teleurgesteld. Let op de categorieen en stijl van wat zij zoeken!',
+];
+
+function showSpeakerWarning() {
+  if (speakerTimer) clearTimeout(speakerTimer);
+  const msg = SPEAKER_WARNINGS[Math.floor(Math.random() * SPEAKER_WARNINGS.length)];
+  document.getElementById('speakerMsg').textContent = msg;
+  document.getElementById('speakerWarning').style.display = 'flex';
+  speakerTimer = setTimeout(() => {
+    document.getElementById('speakerWarning').style.display = 'none';
+  }, 4000);
+}
+
+function showPaperNote(customer) {
+  const tags = customer.wish_tags;
+  const tagLabels = {
+    casual: 'Casual & comfy', retro: 'Retro vibes', Y2K: 'Y2K stijl',
+    glamour: 'Glamour & glitter', kawaii: 'Kawaii & schattig', chic: 'Chic & elegant',
+    avond: 'Avond & formeel', street: 'Street style', minimaal: 'Minimalistisch',
+  };
+  const lines = [
+    `Klant: ${customer.name}`,
+    `Zoekt: ${tags.map(t => tagLabels[t] || t).join(', ')}`,
+    '',
+    'Tip: Match zoveel mogelijk tags voor perfecte score!',
+  ];
+  document.getElementById('paperBody').innerHTML = lines.join('<br>');
+  document.getElementById('paperNote').style.display = 'block';
+}
+
+function hidePaperNote() {
+  document.getElementById('paperNote').style.display = 'none';
+}
 
 function showManagerReaction(reaction) {
   if (bubbleTimer) clearTimeout(bubbleTimer);
