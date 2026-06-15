@@ -507,6 +507,33 @@ body {
   max-width: 600px;
 }
 
+.day-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.day-deco-stars {
+  width: 110px;
+  top: -38px;
+  right: -30px;
+  transform: rotate(12deg);
+}
+
+.day-deco-silver {
+  width: 70px;
+  bottom: 20px;
+  left: -28px;
+  transform: rotate(-15deg);
+}
+
+.day-deco-flower {
+  width: 80px;
+  top: -30px;
+  left: -22px;
+  transform: rotate(-8deg);
+}
+
 .day-tab-img {
   width: 100%;
   height: auto;
