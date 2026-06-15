@@ -71,9 +71,20 @@ body {
   font-weight: 800;
 }
 
+.coin-star {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
 .badge-coin {
   background: #ffd700;
   color: #3a2000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .badge-day {
