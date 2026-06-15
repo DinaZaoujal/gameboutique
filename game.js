@@ -75,6 +75,7 @@ function startGame() {
   document.getElementById('startScreen').style.display = 'none';
   G.cOrder = shuffle([0, 1, 2]);
   G.cIdx = 0;
+  setupPaperDrag();
   showPhoneCall();
 }
 
@@ -340,25 +341,114 @@ function showSpeakerWarning() {
   }, 4000);
 }
 
+const TAG_LABELS = {
+  casual: 'Casual & comfy', retro: 'Retro vibes', Y2K: 'Y2K stijl',
+  glamour: 'Glamour & glitter', kawaii: 'Kawaii & schattig', chic: 'Chic & elegant',
+  avond: 'Avond & formeel', street: 'Street style', minimaal: 'Minimalistisch',
+};
+
 function showPaperNote(customer) {
   const tags = customer.wish_tags;
-  const tagLabels = {
-    casual: 'Casual & comfy', retro: 'Retro vibes', Y2K: 'Y2K stijl',
-    glamour: 'Glamour & glitter', kawaii: 'Kawaii & schattig', chic: 'Chic & elegant',
-    avond: 'Avond & formeel', street: 'Street style', minimaal: 'Minimalistisch',
-  };
   const lines = [
     `Klant: ${customer.name}`,
-    `Zoekt: ${tags.map(t => tagLabels[t] || t).join(', ')}`,
-    '',
-    'Tip: Match zoveel mogelijk tags voor perfecte score!',
+    `Zoekt:`,
+    ...tags.map(t => `- ${TAG_LABELS[t] || t}`),
+    ``,
+    `Tip: Match alle stijlen`,
+    `voor de perfecte score!`,
   ];
   document.getElementById('paperBody').innerHTML = lines.join('<br>');
-  document.getElementById('paperNote').style.display = 'block';
+  const paper = document.getElementById('paperNote');
+  const scene = document.querySelector('.scene');
+  const sw = scene.offsetWidth;
+  const sh = scene.offsetHeight;
+  const pw = 210;
+  const ph = 160;
+  paper.style.transition = 'none';
+  paper.style.opacity = '1';
+  paper.style.left = Math.round((sw - pw) / 2) + 'px';
+  paper.style.top = Math.round((sh - ph) / 2 - 10) + 'px';
+  paper.style.transform = 'rotate(1deg)';
+  paper.style.zIndex = '22';
+  paper.style.display = 'block';
+  document.getElementById('clipAnchor').classList.remove('clipped');
 }
 
 function hidePaperNote() {
-  document.getElementById('paperNote').style.display = 'none';
+  const paper = document.getElementById('paperNote');
+  paper.style.display = 'none';
+}
+
+function setupPaperDrag() {
+  const paper = document.getElementById('paperNote');
+  const clip  = document.getElementById('clipAnchor');
+  let dragging = false, ox = 0, oy = 0;
+
+  function getXY(e) {
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX, y: t.clientY };
+  }
+
+  function onStart(e) {
+    dragging = true;
+    const { x, y } = getXY(e);
+    const r = paper.getBoundingClientRect();
+    ox = x - r.left;
+    oy = y - r.top;
+    paper.style.transition = 'none';
+    paper.style.zIndex = '50';
+    paper.style.transform = 'rotate(-4deg) scale(1.03)';
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!dragging) return;
+    const { x, y } = getXY(e);
+    const base = paper.offsetParent.getBoundingClientRect();
+    paper.style.left = (x - base.left - ox) + 'px';
+    paper.style.top  = (y - base.top  - oy) + 'px';
+    const cr = clip.getBoundingClientRect();
+    const over = x >= cr.left && x <= cr.right && y >= cr.top && y <= cr.bottom;
+    clip.classList.toggle('clip-hover', over);
+    e.preventDefault();
+  }
+
+  function onEnd(e) {
+    if (!dragging) return;
+    dragging = false;
+    const { x, y } = e.changedTouches
+      ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
+      : { x: e.clientX, y: e.clientY };
+    const cr = clip.getBoundingClientRect();
+    const onClip = x >= cr.left && x <= cr.right && y >= cr.top && y <= cr.bottom;
+    clip.classList.remove('clip-hover');
+
+    if (onClip) {
+      const base = paper.offsetParent.getBoundingClientRect();
+      paper.style.transition = 'all 0.3s ease';
+      paper.style.left = (cr.left - base.left - 10) + 'px';
+      paper.style.top  = (cr.top  - base.top) + 'px';
+      paper.style.transform = 'scale(0.08) rotate(8deg)';
+      paper.style.opacity = '0';
+      clip.classList.add('clipped');
+      setTimeout(() => { paper.style.display = 'none'; paper.style.opacity = '1'; }, 320);
+    } else {
+      const scene = document.querySelector('.scene');
+      const sw = scene.offsetWidth, sh = scene.offsetHeight;
+      paper.style.transition = 'all 0.3s ease';
+      paper.style.left = Math.round((sw - 210) / 2) + 'px';
+      paper.style.top  = Math.round((sh - 160) / 2 - 10) + 'px';
+      paper.style.transform = 'rotate(1deg)';
+      paper.style.zIndex = '22';
+    }
+  }
+
+  paper.addEventListener('mousedown',  onStart);
+  paper.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('mousemove',  onMove);
+  document.addEventListener('touchmove',  onMove, { passive: false });
+  document.addEventListener('mouseup',  onEnd);
+  document.addEventListener('touchend', onEnd);
 }
 
 function showManagerReaction(reaction) {
