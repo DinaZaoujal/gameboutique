@@ -609,7 +609,7 @@ body {
 .manager-bubble {
   display: none;
   position: absolute;
-  bottom: 16px;
+  bottom: 160px;
   left: 16px;
   z-index: 35;
   flex-direction: row;
