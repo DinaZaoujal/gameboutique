@@ -372,11 +372,12 @@ function showPaperNote(customer) {
   paper.style.zIndex = '22';
   paper.style.display = 'block';
   document.getElementById('clipAnchor').classList.remove('clipped');
+  document.getElementById('clipAnchor').style.display = 'block';
 }
 
 function hidePaperNote() {
-  const paper = document.getElementById('paperNote');
-  paper.style.display = 'none';
+  document.getElementById('paperNote').style.display = 'none';
+  document.getElementById('clipAnchor').style.display = 'none';
 }
 
 function setupPaperDrag() {
@@ -426,12 +427,11 @@ function setupPaperDrag() {
     if (onClip) {
       const base = paper.offsetParent.getBoundingClientRect();
       paper.style.transition = 'all 0.3s ease';
-      paper.style.left = (cr.left - base.left - 10) + 'px';
-      paper.style.top  = (cr.top  - base.top) + 'px';
-      paper.style.transform = 'scale(0.08) rotate(8deg)';
-      paper.style.opacity = '0';
+      paper.style.left = (cr.left - base.left - 4) + 'px';
+      paper.style.top  = (cr.top  - base.top + 44) + 'px';
+      paper.style.transform = 'rotate(-5deg) scale(0.55)';
+      paper.style.zIndex = '16';
       clip.classList.add('clipped');
-      setTimeout(() => { paper.style.display = 'none'; paper.style.opacity = '1'; }, 320);
     } else {
       const scene = document.querySelector('.scene');
       const sw = scene.offsetWidth, sh = scene.offsetHeight;
