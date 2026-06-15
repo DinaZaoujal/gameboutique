@@ -500,12 +500,28 @@ body {
   z-index: 60;
   background: linear-gradient(to top, #fff0f8, #fdf4fb);
   border-top: 2px solid #ff79c6;
-  padding: 14px 20px 16px;
+  padding: 10px 16px 14px;
   flex-direction: row;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-end;
+  gap: 10px;
   box-shadow: 0 -4px 20px rgba(255, 121, 198, 0.2);
   animation: slideUp 0.35s ease;
+}
+
+.manager-call-img {
+  width: 90px;
+  height: 110px;
+  object-fit: contain;
+  object-position: top;
+  flex-shrink: 0;
+  transition: content 0.2s;
+}
+
+.phone-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
 }
 
 @keyframes slideUp {
@@ -727,6 +743,17 @@ body {
   position: relative;
   width: 92%;
   max-width: 600px;
+}
+
+.day-manager-img {
+  position: absolute;
+  bottom: 0;
+  right: -55px;
+  width: 130px;
+  object-fit: contain;
+  object-position: top;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .day-deco {

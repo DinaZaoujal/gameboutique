@@ -29,6 +29,7 @@ function startGame() {
 function showPhoneCall() {
   const msg = MANAGER_MSGS[Math.min(G.day - 1, MANAGER_MSGS.length - 1)];
   document.getElementById('phoneMsg').textContent = 'Binnenkomend gesprek...';
+  document.getElementById('managerCallImg').src = ASSETS.manager_neutral;
   document.getElementById('phoneActions').innerHTML =
     '<button class="phone-btn answer" onclick="answerCall()">Opnemen</button>' +
     '<button class="phone-btn decline" onclick="dismissCall()">Negeren</button>';
@@ -44,6 +45,7 @@ function answerCall() {
   SFX.stopRing();
   const popup = document.getElementById('phoneCall');
   popup.classList.add('answered');
+  document.getElementById('managerCallImg').src = ASSETS.manager_blij;
   const msg = popup.dataset.msg;
   document.getElementById('phoneMsg').textContent = msg;
   document.getElementById('phoneActions').innerHTML =
@@ -185,6 +187,12 @@ function showDayOverview() {
   document.getElementById('ovDay').textContent = G.day;
   document.getElementById('ovCoins').textContent = G.dayCoins + ' coins';
   document.getElementById('ovScore').textContent = G.dayScore + ' / 9';
+  let managerExpr;
+  if (G.dayScore >= 7)      managerExpr = ASSETS.manager_blij;
+  else if (G.dayScore >= 4) managerExpr = ASSETS.manager_tevreden;
+  else if (G.dayScore >= 1) managerExpr = ASSETS.manager_teleurgesteld;
+  else                      managerExpr = ASSETS.manager_boos;
+  document.getElementById('dayManagerImg').src = managerExpr;
   document.getElementById('dayOverview').style.display = 'flex';
   document.getElementById('wardrobePanel').style.display = 'none';
   document.getElementById('sceneBg').className = 'scene-bg';

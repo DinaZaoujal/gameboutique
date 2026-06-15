@@ -1,4 +1,11 @@
 const ASSETS = {
+  // Manager
+  manager_neutral:      'assets/characters/manager-neutral.png',
+  manager_blij:         'assets/characters/manager-blij.png',
+  manager_tevreden:     'assets/characters/manager-tevreden.png',
+  manager_boos:         'assets/characters/manager-boos.png',
+  manager_teleurgesteld:'assets/characters/manager-teleurgesteld.png',
+  // Klanten
   happy1:  'assets/characters/happy1.png',
   normal1: 'assets/characters/normal1.png',
   sad1:    'assets/characters/sad1.png',
