@@ -35,6 +35,33 @@ const ASSETS = {
   pandoraarmband:       'assets/pandoraarmband.png',
   sunglasses:           'assets/sunglasses.png',
   flower:               'assets/flower.png',
+  glasses:              'assets/glasses.png',
+  // Haar
+  cutehairstylelong:    'assets/cutehairstylelong.png',
+  blacklonghair:        'assets/blacklonghair.png',
+  brownlongwavyhair:    'assets/brownlongwavyhair.png',
+  // Nieuwe tops
+  edgycutetop:          'assets/edgycutetop.png',
+  redtop:               'assets/redtop.png',
+  whiteclassictop:      'assets/whiteclassictop.png',
+  blueduotop:           'assets/blueduotop.png',
+  // Blazers
+  blackblazer:          'assets/blackblazer.png',
+  blueblazer:           'assets/blueblazer.png',
+  bluebasicblazer:      'assets/bluebasicblazer.png',
+  blueduoblazer:        'assets/blueduoblazer.png',
+  // Nieuwe broeken & rokken
+  blackclassicpants:    'assets/blackclassicpants.png',
+  blackskirt:           'assets/blackskirt.png',
+  longdenimskirt:       'assets/longdenimskirt.png',
+  // Nieuwe schoenen
+  redcuteheals:         'assets/redcuteheals.png',
+  redblackclassicheals: 'assets/redblackclassicheals.png',
+  whiteclassicheals:    'assets/whiteclassicheals.png',
+  // Nieuwe tassen
+  pinkschoulderbag:     'assets/pinkschoulderbag.png',
+  redshoulderbag:       'assets/redshoulderbag.png',
+  blueclassicbag:       'assets/blueclassicbag.png',
 };
 
 const ITEMS = [
@@ -61,10 +88,37 @@ const ITEMS = [
   { id: 'jeansbag',             img: ASSETS.jeansbag,             name: 'Jeans bag',            cat: 'Tas',        tags: ['casual', 'retro', 'street'] },
   { id: 'blackcrossbodybag',    img: ASSETS.blackcrossbodybag,    name: 'Black crossbody bag',  cat: 'Tas',        tags: ['chic', 'avond', 'glamour'] },
   // ── Accessoires ──
-  { id: 'pandoracute',          img: ASSETS.pandoracute,          name: 'Pandora ketting',      cat: 'Accessoire', tags: ['chic', 'glamour', 'kawaii'] },
-  { id: 'pandoraarmband',       img: ASSETS.pandoraarmband,       name: 'Pandora armband',      cat: 'Accessoire', tags: ['chic', 'glamour', 'Y2K'] },
-  { id: 'sunglasses',           img: ASSETS.sunglasses,           name: 'Zonnebril',            cat: 'Accessoire', tags: ['retro', 'Y2K', 'casual'] },
-  { id: 'flower',               img: ASSETS.flower,               name: 'Haar bloem',           cat: 'Accessoire', tags: ['kawaii', 'Y2K', 'casual'] },
+  { id: 'pandoracute',          img: ASSETS.pandoracute,          name: 'Pandora ketting',       cat: 'Accessoire', tags: ['chic', 'glamour', 'kawaii'] },
+  { id: 'pandoraarmband',       img: ASSETS.pandoraarmband,       name: 'Pandora armband',       cat: 'Accessoire', tags: ['chic', 'glamour', 'Y2K'] },
+  { id: 'sunglasses',           img: ASSETS.sunglasses,           name: 'Zonnebril',             cat: 'Accessoire', tags: ['retro', 'Y2K', 'casual'] },
+  { id: 'flower',               img: ASSETS.flower,               name: 'Haar bloem',            cat: 'Accessoire', tags: ['kawaii', 'Y2K', 'casual'] },
+  { id: 'glasses',              img: ASSETS.glasses,              name: 'Bril',                  cat: 'Accessoire', tags: ['retro', 'chic', 'casual'] },
+  // ── Haar ──
+  { id: 'cutehairstylelong',    img: ASSETS.cutehairstylelong,    name: 'Cute lang haar',        cat: 'Haar',       tags: ['kawaii', 'Y2K', 'casual'] },
+  { id: 'blacklonghair',        img: ASSETS.blacklonghair,        name: 'Zwart lang haar',       cat: 'Haar',       tags: ['chic', 'glamour', 'avond'] },
+  { id: 'brownlongwavyhair',    img: ASSETS.brownlongwavyhair,    name: 'Bruin wavy haar',       cat: 'Haar',       tags: ['casual', 'retro', 'kawaii'] },
+  // ── Nieuwe Tops ──
+  { id: 'edgycutetop',          img: ASSETS.edgycutetop,          name: 'Edgy cute top',         cat: 'Top',        tags: ['street', 'Y2K', 'retro'] },
+  { id: 'redtop',               img: ASSETS.redtop,               name: 'Rode top',              cat: 'Top',        tags: ['glamour', 'Y2K', 'avond'] },
+  { id: 'whiteclassictop',      img: ASSETS.whiteclassictop,      name: 'Wit classic top',       cat: 'Top',        tags: ['chic', 'casual', 'minimaal'] },
+  { id: 'blueduotop',           img: ASSETS.blueduotop,           name: 'Blue duo top',          cat: 'Top',        tags: ['casual', 'retro', 'chic'] },
+  // ── Blazers ──
+  { id: 'blackblazer',          img: ASSETS.blackblazer,          name: 'Zwarte blazer',         cat: 'Blazer',     tags: ['chic', 'avond', 'glamour'] },
+  { id: 'blueblazer',           img: ASSETS.blueblazer,           name: 'Blauwe blazer',         cat: 'Blazer',     tags: ['chic', 'casual', 'retro'] },
+  { id: 'bluebasicblazer',      img: ASSETS.bluebasicblazer,      name: 'Blue basic blazer',     cat: 'Blazer',     tags: ['casual', 'chic', 'minimaal'] },
+  { id: 'blueduoblazer',        img: ASSETS.blueduoblazer,        name: 'Blue duo blazer',       cat: 'Blazer',     tags: ['chic', 'retro', 'casual'] },
+  // ── Nieuwe Broeken & Rokken ──
+  { id: 'blackclassicpants',    img: ASSETS.blackclassicpants,    name: 'Zwarte classic broek',  cat: 'Broek',      tags: ['chic', 'avond', 'glamour'] },
+  { id: 'blackskirt',           img: ASSETS.blackskirt,           name: 'Zwarte rok',            cat: 'Rok',        tags: ['chic', 'glamour', 'avond'] },
+  { id: 'longdenimskirt',       img: ASSETS.longdenimskirt,       name: 'Long denim skirt',      cat: 'Rok',        tags: ['casual', 'retro', 'street'] },
+  // ── Nieuwe Schoenen ──
+  { id: 'redcuteheals',         img: ASSETS.redcuteheals,         name: 'Rode cute heels',       cat: 'Schoenen',   tags: ['glamour', 'Y2K', 'avond'] },
+  { id: 'redblackclassicheals', img: ASSETS.redblackclassicheals, name: 'Red black classic heels', cat: 'Schoenen', tags: ['chic', 'glamour', 'avond'] },
+  { id: 'whiteclassicheals',    img: ASSETS.whiteclassicheals,    name: 'Witte classic heels',   cat: 'Schoenen',   tags: ['chic', 'avond', 'casual'] },
+  // ── Nieuwe Tassen ──
+  { id: 'pinkschoulderbag',     img: ASSETS.pinkschoulderbag,     name: 'Roze shoulder bag',     cat: 'Tas',        tags: ['glamour', 'Y2K', 'kawaii'] },
+  { id: 'redshoulderbag',       img: ASSETS.redshoulderbag,       name: 'Rode shoulder bag',     cat: 'Tas',        tags: ['glamour', 'avond', 'chic'] },
+  { id: 'blueclassicbag',       img: ASSETS.blueclassicbag,       name: 'Blauwe classic bag',    cat: 'Tas',        tags: ['chic', 'casual', 'retro'] },
 ];
 
 const CUSTOMERS = [
@@ -349,11 +403,13 @@ function renderBagItems() {
   bagItems.innerHTML = '';
   const positions = [
     { top: '2%',  left: '2%'  },
-    { top: '5%',  left: '48%' },
-    { top: '38%', left: '5%'  },
-    { top: '42%', left: '48%' },
-    { top: '68%', left: '10%' },
-    { top: '65%', left: '50%' },
+    { top: '5%',  left: '45%' },
+    { top: '30%', left: '2%'  },
+    { top: '32%', left: '45%' },
+    { top: '58%', left: '2%'  },
+    { top: '58%', left: '45%' },
+    { top: '2%',  left: '22%' },
+    { top: '30%', left: '22%' },
   ];
   Object.values(G.outfit).forEach((item, i) => {
     const thumb = document.createElement('img');
