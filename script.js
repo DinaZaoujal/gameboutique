@@ -51,6 +51,7 @@ const ASSETS = {
   bluebasicblazer:      'assets/bluebasicblazer.png',
   blueduoblazer:        'assets/blueduoblazer.png',
   // Nieuwe broeken & rokken
+  bluebasicpants:       'assets/bluebasicpants.png',
   blackclassicpants:    'assets/blackclassicpants.png',
   blackskirt:           'assets/blackskirt.png',
   longdenimskirt:       'assets/longdenimskirt.png',
@@ -108,6 +109,7 @@ const ITEMS = [
   { id: 'bluebasicblazer',      img: ASSETS.bluebasicblazer,      name: 'Blue basic blazer',     cat: 'Blazer',     tags: ['casual', 'chic', 'minimaal'] },
   { id: 'blueduoblazer',        img: ASSETS.blueduoblazer,        name: 'Blue duo blazer',       cat: 'Blazer',     tags: ['chic', 'retro', 'casual'] },
   // ── Nieuwe Broeken & Rokken ──
+  { id: 'bluebasicpants',       img: ASSETS.bluebasicpants,       name: 'Blue basic broek',      cat: 'Broek',      tags: ['casual', 'retro', 'chic'] },
   { id: 'blackclassicpants',    img: ASSETS.blackclassicpants,    name: 'Zwarte classic broek',  cat: 'Broek',      tags: ['chic', 'avond', 'glamour'] },
   { id: 'blackskirt',           img: ASSETS.blackskirt,           name: 'Zwarte rok',            cat: 'Rok',        tags: ['chic', 'glamour', 'avond'] },
   { id: 'longdenimskirt',       img: ASSETS.longdenimskirt,       name: 'Long denim skirt',      cat: 'Rok',        tags: ['casual', 'retro', 'street'] },
