@@ -163,6 +163,16 @@ function continueToNextDay() {
   loadCustomer();
 }
 
+function showTutorial() {
+  SFX.click();
+  document.getElementById('tutorialOverlay').style.display = 'flex';
+}
+
+function closeTutorial() {
+  SFX.click();
+  document.getElementById('tutorialOverlay').style.display = 'none';
+}
+
 function showFeedback(msg, color) {
   const el = document.getElementById('feedPop');
   el.style.color = color;

@@ -21,7 +21,53 @@
       <img src="assets/gameplay/pc.png" alt="pc" class="pc-img">
       <div class="pc-screen-text">
         <div class="start-sub">Verwelkom klanten, voer gesprekken en style ze met de perfecte outfit!</div>
-        <button class="start-btn" onclick="startGame()">Winkel openen</button>
+        <div class="start-btns">
+          <button class="start-btn" onclick="startGame()">Winkel openen</button>
+          <button class="start-btn secondary" onclick="showTutorial()">Hoe te spelen?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutorial scherm -->
+  <div class="tutorial-overlay" id="tutorialOverlay">
+    <div class="tutorial-tab-wrapper">
+      <img src="assets/gameplay/stars.png" class="tut-deco tut-deco-stars" alt="">
+      <img src="assets/gameplay/golden flower.png" class="tut-deco tut-deco-flower" alt="">
+      <img src="assets/gameplay/tab.jpeg" class="tutorial-tab-img" alt="tutorial">
+      <div class="tutorial-tab-content">
+        <div class="tut-title">Hoe te spelen?</div>
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-num">1</div>
+            <div class="tut-text">
+              <strong>Verwelkom de klant</strong>
+              Lees wat ze zoeken en kies de juiste antwoorden in het gesprek.
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-num">2</div>
+            <div class="tut-text">
+              <strong>Sleep kleding naar de bag</strong>
+              Kies items uit de collectie en sleep ze naar de roze shopping bag.
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-num">3</div>
+            <div class="tut-text">
+              <strong>Klik op Verkopen!</strong>
+              De klant beoordeelt jouw outfit. Hoe beter de match, hoe meer coins!
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-num">4</div>
+            <div class="tut-text">
+              <strong>Verdien coins en punten</strong>
+              Perfecte outfit = 3 punten. Goed = 1 punt. Help 3 klanten per dag!
+            </div>
+          </div>
+        </div>
+        <button class="start-btn" onclick="closeTutorial()">Begrepen, laten we gaan!</button>
       </div>
     </div>
   </div>
