@@ -234,7 +234,7 @@ function submitOutfit() {
   }
   typeText(txt, () => {
     const btn = document.createElement('button');
-    btn.className = 'd-btn pri';
+    btn.className = 'd-btn pri next-customer-btn';
     btn.textContent = 'Volgende klant >';
     btn.onclick = () => { SFX.click(); nextCustomer(); };
     document.getElementById('dActions').appendChild(btn);

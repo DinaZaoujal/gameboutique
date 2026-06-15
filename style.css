@@ -259,6 +259,10 @@ body {
   background: #ff5ab6;
 }
 
+.next-customer-btn {
+  margin-left: auto;
+}
+
 /* â”€â”€ GARDEROBE â”€â”€ */
 .wardrobe {
   background: #fdf0f8;
