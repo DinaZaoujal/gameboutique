@@ -1,4 +1,5 @@
-let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0 };
+let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0 };
+const TOTAL_DAYS = 7;
 
 const MANAGER_MSGS = [
   'Welkom bij Y2K Boutique! Ik ben Belle, jouw manager. Luister goed naar elke klant en style ze perfect. Hoe beter de match, hoe meer coins je verdient. Succes!',
@@ -138,9 +139,11 @@ function submitOutfit() {
     expr = 'sad';
     reaction = 'slecht';
   }
+  const pts = reaction === 'perfect' ? 3 : reaction === 'goed' ? 1 : 0;
   G.coins += earned;
   G.dayCoins += earned;
-  G.dayScore += reaction === 'perfect' ? 3 : reaction === 'goed' ? 1 : 0;
+  G.dayScore += pts;
+  G.totalScore += pts;
   document.getElementById('coinNum').textContent = G.coins;
   setChar(expr);
   document.getElementById('wardrobePanel').style.display = 'none';
@@ -184,6 +187,10 @@ function nextCustomer() {
 }
 
 function showDayOverview() {
+  if (G.day === TOTAL_DAYS) {
+    showEnding();
+    return;
+  }
   document.getElementById('ovDay').textContent = G.day;
   document.getElementById('ovCoins').textContent = G.dayCoins + ' coins';
   document.getElementById('ovScore').textContent = G.dayScore + ' / 9';
@@ -198,6 +205,31 @@ function showDayOverview() {
   document.getElementById('sceneBg').className = 'scene-bg';
 }
 
+function showEnding() {
+  const maxScore = TOTAL_DAYS * 9;
+  const promoted = G.totalScore >= 35;
+  document.getElementById('endingManagerImg').src = promoted ? ASSETS.manager_blij : ASSETS.manager_boos;
+  document.getElementById('endingTitle').textContent = promoted ? 'Gefeliciteerd! Je bent gepromoveerd!' : 'Helaas... Je bent ontslagen.';
+  document.getElementById('endingTitle').style.color = promoted ? '#c2185b' : '#8b0000';
+  document.getElementById('endingMsg').textContent = promoted
+    ? 'Belle is super trots op jou! Met ' + G.totalScore + ' / ' + maxScore + ' punten en ' + G.coins + ' coins heb je bewezen dat jij de beste stylist bent. Welkom als hoofdstylist!'
+    : 'Met ' + G.totalScore + ' / ' + maxScore + ' punten en ' + G.coins + ' coins was het helaas niet genoeg. Belle moest een moeilijke beslissing nemen. Probeer het opnieuw!';
+  document.getElementById('endingScore').textContent = G.totalScore + ' / ' + maxScore + ' punten';
+  document.getElementById('endingCoins').textContent = G.coins + ' coins verdiend';
+  document.getElementById('endingScreen').style.display = 'flex';
+  document.getElementById('wardrobePanel').style.display = 'none';
+  document.getElementById('sceneBg').className = 'scene-bg';
+}
+
+function restartGame() {
+  SFX.click();
+  G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0 };
+  document.getElementById('coinNum').textContent = '0';
+  document.getElementById('dayNum').textContent = '1';
+  document.getElementById('endingScreen').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'flex';
+}
+
 function continueToNextDay() {
   SFX.click();
   G.day++;
@@ -209,6 +241,7 @@ function continueToNextDay() {
   document.getElementById('dayOverview').style.display = 'none';
   showPhoneCall();
 }
+
 
 function showTutorial() {
   SFX.click();

@@ -490,6 +490,115 @@ body {
 
 .start-btn:hover { background: #ff5ab6; }
 
+/* -- EINDSCHERM -- */
+.ending-screen {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+  background: linear-gradient(160deg, #fff0f8 0%, #fce8f3 50%, #ffd6f0 100%);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.ending-manager-img {
+  width: 160px;
+  object-fit: contain;
+  object-position: top;
+  flex-shrink: 0;
+  animation: managerEntrance 0.5s ease;
+}
+
+@keyframes managerEntrance {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ending-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px 24px;
+  text-align: center;
+  max-width: 480px;
+}
+
+.ending-logo {
+  width: 160px;
+  height: auto;
+}
+
+.ending-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #c2185b;
+  letter-spacing: 0.5px;
+}
+
+.ending-msg {
+  font-size: 13px;
+  color: #4a1a35;
+  line-height: 1.7;
+}
+
+.ending-stats {
+  display: flex;
+  gap: 16px;
+  margin: 4px 0;
+}
+
+.ending-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid #ffc0e0;
+  border-radius: 14px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #3a2000;
+}
+
+.ending-stat-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.ending-deco {
+  position: absolute;
+  pointer-events: none;
+}
+
+.ending-deco-stars {
+  width: 130px;
+  top: 10px;
+  right: 10px;
+  transform: rotate(15deg);
+  opacity: 0.85;
+}
+
+.ending-deco-flower {
+  width: 90px;
+  top: 5px;
+  left: 5px;
+  transform: rotate(-10deg);
+  opacity: 0.85;
+}
+
+.ending-deco-silver {
+  width: 75px;
+  bottom: 20px;
+  left: 20px;
+  transform: rotate(-20deg);
+  opacity: 0.75;
+}
+
 /* -- MANAGER TELEFOON -- */
 .phone-call {
   display: none;

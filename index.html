@@ -29,6 +29,30 @@
     </div>
   </div>
 
+  <!-- Eindscherm -->
+  <div class="ending-screen" id="endingScreen">
+    <img src="assets/gameplay/stars.png" class="ending-deco ending-deco-stars" alt="">
+    <img src="assets/gameplay/golden flower.png" class="ending-deco ending-deco-flower" alt="">
+    <img src="assets/gameplay/silverstar.png" class="ending-deco ending-deco-silver" alt="">
+    <img src="assets/characters/manager-blij.png" class="ending-manager-img" id="endingManagerImg" alt="Belle">
+    <div class="ending-content">
+      <img src="assets/gameplay/logoroze.png" class="ending-logo" alt="Y2K Boutique">
+      <div class="ending-title" id="endingTitle">Gefeliciteerd!</div>
+      <div class="ending-msg" id="endingMsg"></div>
+      <div class="ending-stats">
+        <div class="ending-stat">
+          <img src="assets/gameplay/goldenstar.png" class="ending-stat-icon" alt="">
+          <span id="endingScore"></span>
+        </div>
+        <div class="ending-stat">
+          <img src="assets/gameplay/betaalmachine.png" class="ending-stat-icon" alt="">
+          <span id="endingCoins"></span>
+        </div>
+      </div>
+      <button class="start-btn" onclick="restartGame()">Opnieuw spelen</button>
+    </div>
+  </div>
+
   <!-- Manager telefoon popup -->
   <div class="phone-call" id="phoneCall">
     <img src="assets/characters/manager-neutral.png" class="manager-call-img" id="managerCallImg" alt="Belle">
