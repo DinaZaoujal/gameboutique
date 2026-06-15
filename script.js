@@ -225,7 +225,7 @@ const SFX = (() => {
   function toggle() {
     muted = !muted;
     bgMusic.muted = muted;
-    document.getElementById('soundBtn').textContent = muted ? 'ðŸ”‡' : 'ðŸ”Š';
+    document.getElementById('soundBtn').innerHTML = muted ? '&#128263;' : '&#128266;';
   }
 
   return { click, drop, startBoutique, toggle };
