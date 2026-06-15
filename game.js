@@ -2,12 +2,63 @@ let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, da
 const TOTAL_DAYS = 7;
 
 const MANAGER_MSGS = [
-  'Welkom bij Y2K Boutique! Ik ben Belle, jouw manager. Luister goed naar elke klant en style ze perfect. Hoe beter de match, hoe meer coins je verdient. Succes!',
-  'Goedemorgen! Dag 2 al! Klanten hebben elk een unieke smaak. Retro, glamour, kawaii... lees hun wensen goed voor de perfecte outfit!',
-  'Hey jij! Dag 3 is begonnen. De klanten worden veeleisender. Vertrouw op je gevoel voor stijl en kies slim. Ik geloof in jou!',
-  'Dag 4! Nog steeds aan het werk? Geweldig! Probeer vandaag elke klant een perfecte score te geven. Dat levert de meeste coins op!',
-  'Hoi hoi! Belle hier. Wist je dat accessoires en haar ook punten opleveren? Vergeet ze niet mee te nemen in de outfit!',
+  // Dag 1 - welkom
+  [
+    'Welkom bij Y2K Boutique! Ik ben Belle, jouw manager. Luister goed naar elke klant en style ze perfect. Hoe beter de match, hoe meer coins je verdient. Succes!',
+    'Hoi! Fijn dat je er bent! Ik ben Belle. Jouw taak is om klanten te helpen met de perfecte Y2K outfit. Lees hun wensen goed en sleep de items naar de shopping bag. Let\'s go!',
+  ],
+  // Dag 2
+  [
+    'Goedemorgen! Dag 2 al! Klanten hebben elk een unieke smaak. Retro, glamour, kawaii... lees hun wensen goed voor de perfecte outfit!',
+    'Belle hier! Gisteren deed je het prima. Vandaag tip: let op de categorieen. Een broek, top EN schoenen samen geeft meer punten dan slechts 1 item!',
+  ],
+  // Dag 3
+  [
+    'Hey jij! Dag 3 is begonnen. De klanten worden veeleisender. Vertrouw op je gevoel voor stijl en kies slim. Ik geloof in jou!',
+    'Morgen! Belle hier. Dag 3 betekent dat de klanten hogere verwachtingen hebben. Combineer stijlen slim. Een glamour klant wil geen casual sneakers, snap je?',
+  ],
+  // Dag 4
+  [
+    'Dag 4! Nog steeds aan het werk? Geweldig! Probeer vandaag elke klant een perfecte score te geven. Dat levert de meeste coins op!',
+    'Belle hier! Halverwege de week al. Pro tip: accessoires zoals zonnebrillen en kettingen maken een outfit compleet. Vergeet ze niet!',
+  ],
+  // Dag 5
+  [
+    'Hoi hoi! Belle hier. Wist je dat accessoires en haar ook punten opleveren? Vergeet ze niet mee te nemen in de outfit!',
+    'Dag 5! Ik heb de verkoopcijfers bekeken... niet slecht! Maar ik wil vandaag PERFECT zien. Elke klant verdient jouw beste werk!',
+  ],
+  // Dag 6
+  [
+    'Goedemorgen! Dag 6 -- nog 2 dagen te gaan! Jouw prestaties bepalen of je gepromoveerd wordt. Geef alles wat je hebt vandaag!',
+    'Belle hier. Ik ga eerlijk zijn: de eigenaar kijkt mee. Dag 6 en 7 zijn cruciaal. Style elke klant alsof het de laatste kans is. Succes!',
+  ],
+  // Dag 7
+  [
+    'Dit is het! De laatste dag! Belle hier. Alles wat je vandaag doet telt mee voor jouw eindbeoordeling. Maak er iets moois van -- ik geloof in jou!',
+    'Dag 7! De grote finale. Ik ben nerveus en trots tegelijk. Style elke klant perfect en wie weet... feliciteer ik je straks met een promotie!',
+  ],
 ];
+
+const MANAGER_REACTIONS = {
+  perfect: [
+    'Wauw!! Perfecte outfit! Zo doe je dat! Ik ben super trots!',
+    'YES! Die klant was zo blij! Jij hebt een echt talent voor stijl!',
+    'Perfect!! Dit is precies wat ik bedoel. Zo win je het hart van elke klant!',
+    'Oh mijn god, geweldig! Die combo was *chef\'s kiss*. Blijf dit doen!',
+  ],
+  goed: [
+    'Goed gedaan! Niet perfect, maar zeker niet slecht. Volgende keer iets meer op de tags letten!',
+    'Oké, dat was solide werk. Ik denk dat er nog iets meer glamour bij kon, maar de klant was tevreden!',
+    'Belle hier. Goed hoor! Probeer volgende keer de stijl nog beter te matchen voor die perfecte score.',
+    'Netjes! De klant nam het mee. Maar ik weet dat jij beter kan -- doe dat volgende keer!',
+  ],
+  slecht: [
+    'Oei... dat was niet geweldig. Lees de volgende keer beter wat de klant wil. Kijk naar de tags!',
+    'Hmm. Die klant was niet blij. Geen paniek -- iedereen heeft een off day. Maak het goed bij de volgende!',
+    'Belle hier. Ik zag wat er misging. Probeer de stijl van de klant te begrijpen voor je items kiest. Je kan dit!',
+    'Au. Dat deed pijn om te zien. Focus je! Lees de dialoog goed en kies items die passen bij de smaak.',
+  ],
+};
 
 function shuffle(arr) {
   const b = [...arr];
@@ -28,7 +79,8 @@ function startGame() {
 }
 
 function showPhoneCall() {
-  const msg = MANAGER_MSGS[Math.min(G.day - 1, MANAGER_MSGS.length - 1)];
+  const dayMsgs = MANAGER_MSGS[Math.min(G.day - 1, MANAGER_MSGS.length - 1)];
+  const msg = dayMsgs[Math.floor(Math.random() * dayMsgs.length)];
   document.getElementById('phoneMsg').textContent = 'Binnenkomend gesprek...';
   document.getElementById('managerCallImg').src = ASSETS.manager_neutral;
   document.getElementById('phoneActions').innerHTML =
@@ -72,6 +124,7 @@ function setChar(expr) {
 function loadCustomer() {
   G.outfit = {};
   document.getElementById('wardrobePanel').style.display = 'none';
+  document.getElementById('managerBubble').style.display = 'none';
   showScene(0);
 }
 
@@ -168,6 +221,7 @@ function submitOutfit() {
   };
   const txt = lines[reaction][Math.floor(Math.random() * 2)];
   if (earned > 0) showFeedback('+' + earned + ' coins!', '#ffd700');
+  setTimeout(() => showManagerReaction(reaction), 800);
   typeText(txt, () => {
     const btn = document.createElement('button');
     btn.className = 'd-btn pri';
@@ -254,6 +308,24 @@ function showTutorial() {
 function closeTutorial() {
   SFX.click();
   document.getElementById('tutorialOverlay').style.display = 'none';
+}
+
+let bubbleTimer = null;
+
+function showManagerReaction(reaction) {
+  if (bubbleTimer) clearTimeout(bubbleTimer);
+  const msgs = MANAGER_REACTIONS[reaction];
+  const msg = msgs[Math.floor(Math.random() * msgs.length)];
+  let expr;
+  if (reaction === 'perfect')  expr = ASSETS.manager_blij;
+  else if (reaction === 'goed') expr = ASSETS.manager_tevreden;
+  else                          expr = ASSETS.manager_teleurgesteld;
+  document.getElementById('bubbleManagerImg').src = expr;
+  document.getElementById('bubbleText').textContent = msg;
+  document.getElementById('managerBubble').style.display = 'flex';
+  bubbleTimer = setTimeout(() => {
+    document.getElementById('managerBubble').style.display = 'none';
+  }, 4500);
 }
 
 function showFeedback(msg, color) {
