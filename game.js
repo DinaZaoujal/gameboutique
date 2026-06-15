@@ -226,8 +226,12 @@ function submitOutfit() {
   const txt = lines[reaction][Math.floor(Math.random() * 2)];
   hidePaperNote();
   if (earned > 0) showFeedback('+' + earned + ' coins!', '#ffd700');
-  if (reaction === 'slecht') setTimeout(() => showSpeakerWarning(), 600);
-  setTimeout(() => showManagerReaction(reaction), 800);
+  if (reaction === 'slecht') {
+    setTimeout(() => showSpeakerWarning(), 700);
+    setTimeout(() => showManagerReaction(reaction), 5200);
+  } else {
+    setTimeout(() => showManagerReaction(reaction), 1800);
+  }
   typeText(txt, () => {
     const btn = document.createElement('button');
     btn.className = 'd-btn pri';
