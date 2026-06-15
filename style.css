@@ -1,4 +1,4 @@
-* {
+﻿* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -22,7 +22,7 @@ body {
   position: relative;
 }
 
-/* ── HUD ── */
+/* â”€â”€ HUD â”€â”€ */
 .hud {
   display: flex;
   justify-content: space-between;
@@ -82,7 +82,7 @@ body {
   color: #c2185b;
 }
 
-/* ── SCENE ── */
+/* â”€â”€ SCENE â”€â”€ */
 .scene {
   width: 100%;
   height: 420px;
@@ -97,12 +97,12 @@ body {
 .scene-bg {
   position: absolute;
   inset: 0;
-  background: url('assets/achtergrondboutique.jpeg') center / cover no-repeat;
+  background: url('assets/gameplay/achtergrondboutique.jpeg') center / cover no-repeat;
   transition: background-image 0.4s ease;
 }
 
 .scene-bg.changingroom {
-  background: url('assets/changingroom.jpeg') center / cover no-repeat;
+  background: url('assets/gameplay/changingroom.jpeg') center / cover no-repeat;
 }
 
 .scene-deco {
@@ -173,7 +173,7 @@ body {
   100% { opacity: 0; transform: translate(-50%, -95%) scale(0.95); }
 }
 
-/* ── DIALOOG ── */
+/* â”€â”€ DIALOOG â”€â”€ */
 .dialogue {
   background: #fff8fc;
   border-top: 2px solid #ff79c6;
@@ -248,7 +248,7 @@ body {
   background: #ff5ab6;
 }
 
-/* ── GARDEROBE ── */
+/* â”€â”€ GARDEROBE â”€â”€ */
 .wardrobe {
   background: #fdf0f8;
   border-top: 1px solid #ffc0e0;
@@ -332,7 +332,7 @@ body {
   color: #e0569a;
 }
 
-/* ── OUTFIT PREVIEW ── */
+/* â”€â”€ OUTFIT PREVIEW â”€â”€ */
 .outfit-preview {
   width: 240px;
   display: flex;
@@ -408,7 +408,7 @@ body {
   margin-top: 10px;
 }
 
-/* ── START SCHERM ── */
+/* â”€â”€ START SCHERM â”€â”€ */
 .start-screen {
   position: absolute;
   inset: 0;

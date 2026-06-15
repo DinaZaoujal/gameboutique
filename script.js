@@ -1,71 +1,71 @@
-const ASSETS = {
-  happy1:  'assets/happy1.png',
-  normal1: 'assets/normal1.png',
-  sad1:    'assets/sad1.png',
-  happy2:  'assets/happy2.png',
-  normal2: 'assets/normal2.png',
-  sad2:    'assets/sad2.png',
-  happy3:  'assets/happy3.png',
-  normal3: 'assets/normal3.png',
-  mad3:    'assets/mad3.png',
+﻿const ASSETS = {
+  happy1:  'assets/characters/happy1.png',
+  normal1: 'assets/characters/normal1.png',
+  sad1:    'assets/characters/sad1.png',
+  happy2:  'assets/characters/happy2.png',
+  normal2: 'assets/characters/normal2.png',
+  sad2:    'assets/characters/sad2.png',
+  happy3:  'assets/characters/happy3.png',
+  normal3: 'assets/characters/normal3.png',
+  mad3:    'assets/characters/mad3.png',
   // Tops
-  top:                  'assets/top.png',
-  whitetop:             'assets/whitetop.png',
-  whitebluetop:         'assets/whitebluetop.png',
-  bluecutetop:          'assets/bluecutetop.png',
-  yellowtop:            'assets/yellowtop.png',
-  pinktop:              'assets/pinktop.png',
-  pinkjapanesestyletop: 'assets/pinkjapanesestyletop.png',
-  coceqettetop:         'assets/coceqettetop.png',
+  top:                  'assets/clothing/top.png',
+  whitetop:             'assets/clothing/whitetop.png',
+  whitebluetop:         'assets/clothing/whitebluetop.png',
+  bluecutetop:          'assets/clothing/bluecutetop.png',
+  yellowtop:            'assets/clothing/yellowtop.png',
+  pinktop:              'assets/clothing/pinktop.png',
+  pinkjapanesestyletop: 'assets/clothing/pinkjapanesestyletop.png',
+  coceqettetop:         'assets/clothing/coceqettetop.png',
   // Broeken & rokken
-  pants:                'assets/pants.png',
-  lightblueflaredjeans: 'assets/lightblueflaredjeans.png',
-  blueskirt:            'assets/blueskirt.png',
+  pants:                'assets/clothing/pants.png',
+  lightblueflaredjeans: 'assets/clothing/lightblueflaredjeans.png',
+  blueskirt:            'assets/clothing/blueskirt.png',
   // Schoenen
-  hels:                 'assets/hels.png',
-  shoes:                'assets/shoes.png',
-  blackcuteshoes:       'assets/blackcuteshoes.png',
-  pinkheelsy2k:         'assets/pinkheelsy2k.png',
-  hellokitysneakers:    'assets/hellokitysneakers.png',
+  hels:                 'assets/clothing/hels.png',
+  shoes:                'assets/clothing/shoes.png',
+  blackcuteshoes:       'assets/clothing/blackcuteshoes.png',
+  pinkheelsy2k:         'assets/clothing/pinkheelsy2k.png',
+  hellokitysneakers:    'assets/clothing/hellokitysneakers.png',
   // Tassen
-  jeansbag:             'assets/jeansbag.png',
-  blackcrossbodybag:    'assets/blackcrossbodybag.png',
+  jeansbag:             'assets/clothing/jeansbag.png',
+  blackcrossbodybag:    'assets/clothing/blackcrossbodybag.png',
   // Accessoires
-  pandoracute:          'assets/pandoracute.png',
-  pandoraarmband:       'assets/pandoraarmband.png',
-  sunglasses:           'assets/sunglasses.png',
-  flower:               'assets/flower.png',
-  glasses:              'assets/glasses.png',
+  pandoracute:          'assets/clothing/pandoracute.png',
+  pandoraarmband:       'assets/clothing/pandoraarmband.png',
+  sunglasses:           'assets/clothing/sunglasses.png',
+  flower:               'assets/clothing/flower.png',
+  glasses:              'assets/clothing/glasses.png',
   // Haar
-  cutehairstylelong:    'assets/cutehairstylelong.png',
-  blacklonghair:        'assets/blacklonghair.png',
-  brownlongwavyhair:    'assets/brownlongwavyhair.png',
+  cutehairstylelong:    'assets/clothing/cutehairstylelong.png',
+  blacklonghair:        'assets/clothing/blacklonghair.png',
+  brownlongwavyhair:    'assets/clothing/brownlongwavyhair.png',
   // Nieuwe tops
-  edgycutetop:          'assets/edgycutetop.png',
-  redtop:               'assets/redtop.png',
-  whiteclassictop:      'assets/whiteclassictop.png',
-  blueduotop:           'assets/blueduotop.png',
+  edgycutetop:          'assets/clothing/edgycutetop.png',
+  redtop:               'assets/clothing/redtop.png',
+  whiteclassictop:      'assets/clothing/whiteclassictop.png',
+  blueduotop:           'assets/clothing/blueduotop.png',
   // Blazers
-  blackblazer:          'assets/blackblazer.png',
-  blueblazer:           'assets/blueblazer.png',
-  blueduoblazer:        'assets/blueduoblazer.png',
+  blackblazer:          'assets/clothing/blackblazer.png',
+  blueblazer:           'assets/clothing/blueblazer.png',
+  blueduoblazer:        'assets/clothing/blueduoblazer.png',
   // Nieuwe broeken & rokken
-  bluebasicpants:       'assets/bluebasicpants.png',
-  blackclassicpants:    'assets/blackclassicpants.png',
-  blackskirt:           'assets/blackskirt.png',
-  longdenimskirt:       'assets/longdenimskirt.png',
+  bluebasicpants:       'assets/clothing/bluebasicpants.png',
+  blackclassicpants:    'assets/clothing/blackclassicpants.png',
+  blackskirt:           'assets/clothing/blackskirt.png',
+  longdenimskirt:       'assets/clothing/longdenimskirt.png',
   // Nieuwe schoenen
-  redcuteheals:         'assets/redcuteheals.png',
-  redblackclassicheals: 'assets/redblackclassicheals.png',
-  whiteclassicheals:    'assets/whiteclassicheals.png',
+  redcuteheals:         'assets/clothing/redcuteheals.png',
+  redblackclassicheals: 'assets/clothing/redblackclassicheals.png',
+  whiteclassicheals:    'assets/clothing/whiteclassicheals.png',
   // Nieuwe tassen
-  pinkschoulderbag:     'assets/pinkschoulderbag.png',
-  redshoulderbag:       'assets/redshoulderbag.png',
-  blueclassicbag:       'assets/blueclassicbag.png',
+  pinkschoulderbag:     'assets/clothing/pinkschoulderbag.png',
+  redshoulderbag:       'assets/clothing/redshoulderbag.png',
+  blueclassicbag:       'assets/clothing/blueclassicbag.png',
 };
 
 const ITEMS = [
-  // ── Tops ──
+  // â”€â”€ Tops â”€â”€
   { id: 'top',                  img: ASSETS.top,                  name: 'Polo crop top',        cat: 'Top',        tags: ['casual', 'retro', 'chic'] },
   { id: 'whitetop',             img: ASSETS.whitetop,             name: 'Wit basic top',        cat: 'Top',        tags: ['casual', 'chic', 'minimaal'] },
   { id: 'whitebluetop',         img: ASSETS.whitebluetop,         name: 'White blue top',       cat: 'Top',        tags: ['casual', 'retro', 'street'] },
@@ -74,48 +74,48 @@ const ITEMS = [
   { id: 'pinktop',              img: ASSETS.pinktop,              name: 'Roze top',             cat: 'Top',        tags: ['glamour', 'Y2K', 'kawaii'] },
   { id: 'pinkjapanesestyletop', img: ASSETS.pinkjapanesestyletop, name: 'Japanese style top',   cat: 'Top',        tags: ['kawaii', 'Y2K', 'chic'] },
   { id: 'coceqettetop',         img: ASSETS.coceqettetop,         name: 'Coquette top',         cat: 'Top',        tags: ['glamour', 'chic', 'avond'] },
-  // ── Broeken & Rokken ──
+  // â”€â”€ Broeken & Rokken â”€â”€
   { id: 'pants',                img: ASSETS.pants,                name: 'Y2K flare jeans',      cat: 'Broek',      tags: ['retro', 'glamour', 'Y2K'] },
   { id: 'lightblueflaredjeans', img: ASSETS.lightblueflaredjeans, name: 'Light blue flared',    cat: 'Broek',      tags: ['retro', 'casual', 'Y2K'] },
   { id: 'blueskirt',            img: ASSETS.blueskirt,            name: 'Blauwe rok',           cat: 'Rok',        tags: ['chic', 'casual', 'kawaii'] },
-  // ── Schoenen ──
+  // â”€â”€ Schoenen â”€â”€
   { id: 'hels',                 img: ASSETS.hels,                 name: 'Hoge laarzen',         cat: 'Schoenen',   tags: ['glamour', 'avond', 'chic'] },
   { id: 'shoes',                img: ASSETS.shoes,                name: 'Adidas Gazelle',        cat: 'Schoenen',   tags: ['casual', 'retro', 'street'] },
   { id: 'blackcuteshoes',       img: ASSETS.blackcuteshoes,       name: 'Black cute shoes',     cat: 'Schoenen',   tags: ['chic', 'kawaii', 'casual'] },
   { id: 'pinkheelsy2k',         img: ASSETS.pinkheelsy2k,         name: 'Pink Y2K heels',       cat: 'Schoenen',   tags: ['glamour', 'Y2K', 'avond'] },
   { id: 'hellokitysneakers',    img: ASSETS.hellokitysneakers,    name: 'Hello Kitty sneakers', cat: 'Schoenen',   tags: ['kawaii', 'casual', 'Y2K'] },
-  // ── Tassen ──
+  // â”€â”€ Tassen â”€â”€
   { id: 'jeansbag',             img: ASSETS.jeansbag,             name: 'Jeans bag',            cat: 'Tas',        tags: ['casual', 'retro', 'street'] },
   { id: 'blackcrossbodybag',    img: ASSETS.blackcrossbodybag,    name: 'Black crossbody bag',  cat: 'Tas',        tags: ['chic', 'avond', 'glamour'] },
-  // ── Accessoires ──
+  // â”€â”€ Accessoires â”€â”€
   { id: 'pandoracute',          img: ASSETS.pandoracute,          name: 'Pandora ketting',       cat: 'Accessoire', tags: ['chic', 'glamour', 'kawaii'] },
   { id: 'pandoraarmband',       img: ASSETS.pandoraarmband,       name: 'Pandora armband',       cat: 'Accessoire', tags: ['chic', 'glamour', 'Y2K'] },
   { id: 'sunglasses',           img: ASSETS.sunglasses,           name: 'Zonnebril',             cat: 'Accessoire', tags: ['retro', 'Y2K', 'casual'] },
   { id: 'flower',               img: ASSETS.flower,               name: 'Haar bloem',            cat: 'Accessoire', tags: ['kawaii', 'Y2K', 'casual'] },
   { id: 'glasses',              img: ASSETS.glasses,              name: 'Bril',                  cat: 'Accessoire', tags: ['retro', 'chic', 'casual'] },
-  // ── Haar ──
+  // â”€â”€ Haar â”€â”€
   { id: 'cutehairstylelong',    img: ASSETS.cutehairstylelong,    name: 'Cute lang haar',        cat: 'Haar',       tags: ['kawaii', 'Y2K', 'casual'] },
   { id: 'blacklonghair',        img: ASSETS.blacklonghair,        name: 'Zwart lang haar',       cat: 'Haar',       tags: ['chic', 'glamour', 'avond'] },
   { id: 'brownlongwavyhair',    img: ASSETS.brownlongwavyhair,    name: 'Bruin wavy haar',       cat: 'Haar',       tags: ['casual', 'retro', 'kawaii'] },
-  // ── Nieuwe Tops ──
+  // â”€â”€ Nieuwe Tops â”€â”€
   { id: 'edgycutetop',          img: ASSETS.edgycutetop,          name: 'Edgy cute top',         cat: 'Top',        tags: ['street', 'Y2K', 'retro'] },
   { id: 'redtop',               img: ASSETS.redtop,               name: 'Rode top',              cat: 'Top',        tags: ['glamour', 'Y2K', 'avond'] },
   { id: 'whiteclassictop',      img: ASSETS.whiteclassictop,      name: 'Wit classic top',       cat: 'Top',        tags: ['chic', 'casual', 'minimaal'] },
   { id: 'blueduotop',           img: ASSETS.blueduotop,           name: 'Blue duo top',          cat: 'Top',        tags: ['casual', 'retro', 'chic'] },
-  // ── Blazers ──
+  // â”€â”€ Blazers â”€â”€
   { id: 'blackblazer',          img: ASSETS.blackblazer,          name: 'Zwarte blazer',         cat: 'Blazer',     tags: ['chic', 'avond', 'glamour'] },
   { id: 'blueblazer',           img: ASSETS.blueblazer,           name: 'Blauwe blazer',         cat: 'Blazer',     tags: ['chic', 'casual', 'retro'] },
   { id: 'blueduoblazer',        img: ASSETS.blueduoblazer,        name: 'Blue duo blazer',       cat: 'Blazer',     tags: ['chic', 'retro', 'casual'] },
-  // ── Nieuwe Broeken & Rokken ──
+  // â”€â”€ Nieuwe Broeken & Rokken â”€â”€
   { id: 'bluebasicpants',       img: ASSETS.bluebasicpants,       name: 'Blue basic broek',      cat: 'Broek',      tags: ['casual', 'retro', 'chic'] },
   { id: 'blackclassicpants',    img: ASSETS.blackclassicpants,    name: 'Zwarte classic broek',  cat: 'Broek',      tags: ['chic', 'avond', 'glamour'] },
   { id: 'blackskirt',           img: ASSETS.blackskirt,           name: 'Zwarte rok',            cat: 'Rok',        tags: ['chic', 'glamour', 'avond'] },
   { id: 'longdenimskirt',       img: ASSETS.longdenimskirt,       name: 'Long denim skirt',      cat: 'Rok',        tags: ['casual', 'retro', 'street'] },
-  // ── Nieuwe Schoenen ──
+  // â”€â”€ Nieuwe Schoenen â”€â”€
   { id: 'redcuteheals',         img: ASSETS.redcuteheals,         name: 'Rode cute heels',       cat: 'Schoenen',   tags: ['glamour', 'Y2K', 'avond'] },
   { id: 'redblackclassicheals', img: ASSETS.redblackclassicheals, name: 'Red black classic heels', cat: 'Schoenen', tags: ['chic', 'glamour', 'avond'] },
   { id: 'whiteclassicheals',    img: ASSETS.whiteclassicheals,    name: 'Witte classic heels',   cat: 'Schoenen',   tags: ['chic', 'avond', 'casual'] },
-  // ── Nieuwe Tassen ──
+  // â”€â”€ Nieuwe Tassen â”€â”€
   { id: 'pinkschoulderbag',     img: ASSETS.pinkschoulderbag,     name: 'Roze shoulder bag',     cat: 'Tas',        tags: ['glamour', 'Y2K', 'kawaii'] },
   { id: 'redshoulderbag',       img: ASSETS.redshoulderbag,       name: 'Rode shoulder bag',     cat: 'Tas',        tags: ['glamour', 'avond', 'chic'] },
   { id: 'blueclassicbag',       img: ASSETS.blueclassicbag,       name: 'Blauwe classic bag',    cat: 'Tas',        tags: ['chic', 'casual', 'retro'] },
@@ -151,7 +151,7 @@ const CUSTOMERS = [
     scenes: [
       {
         phase: 'binnenkomst', expr: 'normal', speaker: 'Zara',
-        text: 'Hiii! Ik ben dol op die early 2000s fashion — low rise, glitter, alles een beetje overdreven. Ik wil iets echt Y2K!',
+        text: 'Hiii! Ik ben dol op die early 2000s fashion â€” low rise, glitter, alles een beetje overdreven. Ik wil iets echt Y2K!',
         actions: [{ lbl: 'Vertel me meer!', next: 1 }, { lbl: 'Ik heb precies iets voor jou!', next: 2 }]
       },
       {
@@ -183,7 +183,7 @@ const CUSTOMERS = [
       },
       {
         phase: 'styling', expr: 'normal', speaker: 'Boutique',
-        text: 'Hana wil een chique look voor haar werk event. Let op — ze is kritisch!',
+        text: 'Hana wil een chique look voor haar werk event. Let op â€” ze is kritisch!',
         actions: [], wardrobe: true
       },
     ]
@@ -192,7 +192,7 @@ const CUSTOMERS = [
 
 let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null };
 
-// ── AUDIO ──
+// â”€â”€ AUDIO â”€â”€
 const SFX = (() => {
   const bgMusic = new Audio('music/boutique.mp3');
   bgMusic.loop = true;
@@ -225,7 +225,7 @@ const SFX = (() => {
   function toggle() {
     muted = !muted;
     bgMusic.muted = muted;
-    document.getElementById('soundBtn').textContent = muted ? '🔇' : '🔊';
+    document.getElementById('soundBtn').textContent = muted ? 'ðŸ”‡' : 'ðŸ”Š';
   }
 
   return { click, drop, startBoutique, toggle };
@@ -415,7 +415,7 @@ function renderBagItems() {
     const thumb = document.createElement('img');
     thumb.className = 'bag-item-thumb';
     thumb.src = item.img;
-    thumb.title = item.name + ' — klik om te verwijderen';
+    thumb.title = item.name + ' â€” klik om te verwijderen';
     const rot = (Math.random() * 30 - 15).toFixed(1);
     const pos = positions[i % positions.length];
     thumb.style.cssText = `top:${pos.top};left:${pos.left};transform:rotate(${rot}deg)`;

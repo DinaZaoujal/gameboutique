@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Y2K Boutique</title>
-  <link rel="icon" type="image/jpeg" href="assets/tab.jpeg">
+  <link rel="icon" type="image/jpeg" href="assets/gameplay/tab.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Jua&family=Kalnia:wght@100..700&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ole&display=swap" rel="stylesheet">
@@ -16,9 +16,9 @@
 
   <!-- Start scherm -->
   <div class="start-screen" id="startScreen">
-    <img src="assets/logoroze.png" alt="Y2K Boutique" class="start-logo">
+    <img src="assets/gameplay/logoroze.png" alt="Y2K Boutique" class="start-logo">
     <div class="pc-wrapper">
-      <img src="assets/pc.png" alt="pc" class="pc-img">
+      <img src="assets/gameplay/pc.png" alt="pc" class="pc-img">
       <div class="pc-screen-text">
         <div class="start-sub">Verwelkom klanten, voer gesprekken en style ze met de perfecte outfit!</div>
         <button class="start-btn" onclick="startGame()">Winkel openen</button>
@@ -28,11 +28,11 @@
 
   <!-- HUD -->
   <div class="hud">
-    <img src="assets/logoroze.png" alt="Y2K Boutique" class="hud-logo">
+    <img src="assets/gameplay/logoroze.png" alt="Y2K Boutique" class="hud-logo">
     <div class="hud-right">
       <div class="badge badge-day">Dag <span id="dayNum">1</span></div>
       <div class="badge badge-coin">&#9733; <span id="coinNum">0</span></div>
-      <button class="sound-btn" id="soundBtn" onclick="SFX.toggle()">🔊</button>
+      <button class="sound-btn" id="soundBtn" onclick="SFX.toggle()">ðŸ”Š</button>
     </div>
   </div>
 
@@ -62,7 +62,7 @@
       <div class="outfit-preview" id="outfitPreview">
         <div class="wrd-label">Jouw outfit</div>
         <div class="bag-drop-zone" id="bagDropZone">
-          <img src="assets/shoppingbag.png" alt="Shopping bag" class="bag-img" id="bagImg">
+          <img src="assets/gameplay/pinkshopppingcar.png" alt="Shopping bag" class="bag-img" id="bagImg">
           <div class="bag-items" id="bagItems"></div>
         </div>
       </div>
