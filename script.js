@@ -1,4 +1,4 @@
-const ASSETS = {
+﻿const ASSETS = {
   happy1:  'assets/characters/happy1.png',
   normal1: 'assets/characters/normal1.png',
   sad1:    'assets/characters/sad1.png',

@@ -347,108 +347,72 @@ const TAG_LABELS = {
   avond: 'Avond & formeel', street: 'Street style', minimaal: 'Minimalistisch',
 };
 
+let paperClipped = true;
+
 function showPaperNote(customer) {
   const tags = customer.wish_tags;
   const lines = [
     `Klant: ${customer.name}`,
     `Zoekt:`,
     ...tags.map(t => `- ${TAG_LABELS[t] || t}`),
-    ``,
+    `&nbsp;`,
     `Tip: Match alle stijlen`,
     `voor de perfecte score!`,
   ];
   document.getElementById('paperBody').innerHTML = lines.join('<br>');
+
+  const clip  = document.getElementById('clipAnchor');
   const paper = document.getElementById('paperNote');
-  const scene = document.querySelector('.scene');
-  const sw = scene.offsetWidth;
-  const sh = scene.offsetHeight;
-  const pw = 210;
-  const ph = 160;
-  paper.style.transition = 'none';
-  paper.style.opacity = '1';
-  paper.style.left = Math.round((sw - pw) / 2) + 'px';
-  paper.style.top = Math.round((sh - ph) / 2 - 10) + 'px';
-  paper.style.transform = 'rotate(1deg)';
-  paper.style.zIndex = '22';
-  paper.style.display = 'block';
-  document.getElementById('clipAnchor').classList.remove('clipped');
-  document.getElementById('clipAnchor').style.display = 'block';
+  clip.style.display = 'block';
+  clip.classList.remove('clipped');
+
+  paper.style.cssText = 'display:block;left:6px;top:48px;transform:rotate(-4deg) scale(0.55);transform-origin:top left;z-index:16;transition:none;opacity:1;';
+  paperClipped = true;
 }
 
 function hidePaperNote() {
   document.getElementById('paperNote').style.display = 'none';
   document.getElementById('clipAnchor').style.display = 'none';
+  paperClipped = true;
 }
 
 function setupPaperDrag() {
   const paper = document.getElementById('paperNote');
   const clip  = document.getElementById('clipAnchor');
-  let dragging = false, ox = 0, oy = 0;
 
-  function getXY(e) {
-    const t = e.touches ? e.touches[0] : e;
-    return { x: t.clientX, y: t.clientY };
+  function snapToClip() {
+    paper.style.transition = 'all 0.35s ease';
+    paper.style.left = '6px';
+    paper.style.top  = '48px';
+    paper.style.transform = 'rotate(-4deg) scale(0.55)';
+    paper.style.transformOrigin = 'top left';
+    paper.style.zIndex = '16';
+    paper.style.cursor = 'pointer';
+    clip.classList.add('clipped');
+    paperClipped = true;
   }
 
-  function onStart(e) {
-    dragging = true;
-    const { x, y } = getXY(e);
-    const r = paper.getBoundingClientRect();
-    ox = x - r.left;
-    oy = y - r.top;
-    paper.style.transition = 'none';
-    paper.style.zIndex = '50';
-    paper.style.transform = 'rotate(-4deg) scale(1.03)';
-    e.preventDefault();
+  function snapToCenter() {
+    const scene = paper.offsetParent;
+    const sw = scene.offsetWidth, sh = scene.offsetHeight;
+    paper.style.transition = 'all 0.35s ease';
+    paper.style.left = Math.round((sw - 210) / 2) + 'px';
+    paper.style.top  = Math.round((sh - 160) / 2 - 10) + 'px';
+    paper.style.transform = 'rotate(1deg) scale(1)';
+    paper.style.transformOrigin = 'center center';
+    paper.style.zIndex = '22';
+    paper.style.cursor = 'pointer';
+    clip.classList.remove('clipped');
+    paperClipped = false;
   }
 
-  function onMove(e) {
-    if (!dragging) return;
-    const { x, y } = getXY(e);
-    const base = paper.offsetParent.getBoundingClientRect();
-    paper.style.left = (x - base.left - ox) + 'px';
-    paper.style.top  = (y - base.top  - oy) + 'px';
-    const cr = clip.getBoundingClientRect();
-    const over = x >= cr.left && x <= cr.right && y >= cr.top && y <= cr.bottom;
-    clip.classList.toggle('clip-hover', over);
-    e.preventDefault();
+  function onClick(e) {
+    if (paper.style.display === 'none') return;
+    if (paperClipped) { snapToCenter(); } else { snapToClip(); }
   }
 
-  function onEnd(e) {
-    if (!dragging) return;
-    dragging = false;
-    const { x, y } = e.changedTouches
-      ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
-      : { x: e.clientX, y: e.clientY };
-    const cr = clip.getBoundingClientRect();
-    const onClip = x >= cr.left && x <= cr.right && y >= cr.top && y <= cr.bottom;
-    clip.classList.remove('clip-hover');
-
-    if (onClip) {
-      const base = paper.offsetParent.getBoundingClientRect();
-      paper.style.transition = 'all 0.3s ease';
-      paper.style.left = (cr.left - base.left - 4) + 'px';
-      paper.style.top  = (cr.top  - base.top + 44) + 'px';
-      paper.style.transform = 'rotate(-5deg) scale(0.55)';
-      paper.style.zIndex = '16';
-      clip.classList.add('clipped');
-    } else {
-      const scene = document.querySelector('.scene');
-      const sw = scene.offsetWidth, sh = scene.offsetHeight;
-      paper.style.transition = 'all 0.3s ease';
-      paper.style.left = Math.round((sw - 210) / 2) + 'px';
-      paper.style.top  = Math.round((sh - 160) / 2 - 10) + 'px';
-      paper.style.transform = 'rotate(1deg)';
-      paper.style.zIndex = '22';
-    }
-  }
-
-  paper.addEventListener('mousedown',  onStart);
-  paper.addEventListener('touchstart', onStart, { passive: false });
-  document.addEventListener('mousemove',  onMove);
-  document.addEventListener('touchmove',  onMove, { passive: false });
-  document.addEventListener('mouseup',  onEnd);
-  document.addEventListener('touchend', onEnd);
+  paper.addEventListener('click', onClick);
+  paper.addEventListener('touchend', function(e) { e.preventDefault(); onClick(e); });
 }
 
 function showManagerReaction(reaction) {

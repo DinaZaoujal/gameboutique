@@ -80,7 +80,7 @@ body {
 }
 
 .badge-coin {
-  background: #ffd700;
+  background: #f1f095;
   color: #3a2000;
   display: flex;
   align-items: center;
@@ -543,7 +543,7 @@ body {
 .speaker-title {
   font-size: 13px;
   font-weight: 900;
-  color: #e8a000;
+  color: #ffef87;
   letter-spacing: 0.5px;
 }
 
@@ -586,12 +586,12 @@ body {
   display: none;
   position: absolute;
   width: 210px;
-  cursor: grab;
+  cursor: pointer;
   z-index: 22;
   user-select: none;
 }
 
-.paper-note:active { cursor: grabbing; }
+.paper-note:hover { filter: brightness(1.05); }
 
 .paper-bg-img {
   width: 100%;
