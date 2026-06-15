@@ -101,13 +101,17 @@ const SFX = (() => {
   const clickSound = new Audio('music/click.mp3');
   clickSound.volume = 0.6;
 
+  let muted = false;
+
   function click() {
+    if (muted) return;
     const s = clickSound.cloneNode();
     s.volume = 0.6;
     s.play().catch(() => {});
   }
 
   function drop() {
+    if (muted) return;
     const s = clickSound.cloneNode();
     s.volume = 0.4;
     s.playbackRate = 1.4;
@@ -118,7 +122,13 @@ const SFX = (() => {
     bgMusic.play().catch(() => {});
   }
 
-  return { click, drop, startBoutique };
+  function toggle() {
+    muted = !muted;
+    bgMusic.muted = muted;
+    document.getElementById('soundBtn').textContent = muted ? '🔇' : '🔊';
+  }
+
+  return { click, drop, startBoutique, toggle };
 })();
 
 function shuffle(arr) {
@@ -200,6 +210,51 @@ function typeText(txt, cb) {
   }, 20);
 }
 
+function addTouchDrag(card, item) {
+  let ghost = null;
+
+  card.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    card.classList.add('dragging');
+    ghost = document.createElement('img');
+    ghost.src = item.img;
+    ghost.style.cssText = `position:fixed;width:90px;height:90px;object-fit:contain;pointer-events:none;z-index:9999;opacity:0.85;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25));left:${t.clientX - 45}px;top:${t.clientY - 45}px`;
+    document.body.appendChild(ghost);
+  }, { passive: false });
+
+  card.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    if (ghost) {
+      ghost.style.left = (t.clientX - 45) + 'px';
+      ghost.style.top  = (t.clientY - 45) + 'px';
+    }
+    const zone = document.getElementById('bagDropZone');
+    const r = zone.getBoundingClientRect();
+    const over = t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom;
+    zone.classList.toggle('drag-over', over);
+  }, { passive: false });
+
+  card.addEventListener('touchend', e => {
+    e.preventDefault();
+    card.classList.remove('dragging');
+    const zone = document.getElementById('bagDropZone');
+    zone.classList.remove('drag-over');
+    if (ghost) {
+      const t = e.changedTouches[0];
+      const r = zone.getBoundingClientRect();
+      if (t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom) {
+        SFX.drop();
+        G.outfit[item.cat] = item;
+        renderWardrobe();
+      }
+      document.body.removeChild(ghost);
+      ghost = null;
+    }
+  }, { passive: false });
+}
+
 function renderWardrobe() {
   const grid = document.getElementById('itemsGrid');
   grid.innerHTML = '';
@@ -235,6 +290,7 @@ function renderWardrobe() {
     });
     card.addEventListener('dragend', () => card.classList.remove('dragging'));
 
+    addTouchDrag(card, item);
     grid.appendChild(card);
   });
 
