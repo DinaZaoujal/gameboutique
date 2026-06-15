@@ -433,7 +433,7 @@ body {
 }
 
 .start-logo {
-  max-width: 260px;
+  max-width: 190px;
   height: auto;
 }
 
@@ -448,7 +448,7 @@ body {
 }
 
 .pc-img {
-  width: 440px;
+  width: 500px;
   height: auto;
   display: block;
 }
@@ -489,6 +489,100 @@ body {
 }
 
 .start-btn:hover { background: #ff5ab6; }
+
+/* -- MANAGER TELEFOON -- */
+.phone-call {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: linear-gradient(to top, #fff0f8, #fdf4fb);
+  border-top: 2px solid #ff79c6;
+  padding: 14px 20px 16px;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 -4px 20px rgba(255, 121, 198, 0.2);
+  animation: slideUp 0.35s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.phone-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: phoneWiggle 0.5s ease infinite alternate;
+}
+
+@keyframes phoneWiggle {
+  from { transform: rotate(-8deg); }
+  to   { transform: rotate(8deg);  }
+}
+
+.phone-call.answered .phone-img {
+  animation: none;
+  transform: rotate(0deg);
+}
+
+.phone-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.phone-caller {
+  font-size: 13px;
+  font-weight: 900;
+  color: #c2185b;
+  letter-spacing: 0.5px;
+}
+
+.phone-msg {
+  font-size: 13px;
+  color: #4a1a35;
+  line-height: 1.6;
+  min-height: 36px;
+}
+
+.phone-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.phone-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-family: 'Jua', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.phone-btn.answer {
+  background: #ff79c6;
+  color: #1a0a2e;
+}
+
+.phone-btn.answer:hover { background: #ff5ab6; }
+
+.phone-btn.decline {
+  background: #fce4f3;
+  border: 1.5px solid #ff79c6;
+  color: #c2185b;
+}
+
+.phone-btn.decline:hover { background: #ffd0eb; }
 
 .start-btns {
   display: flex;

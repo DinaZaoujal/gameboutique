@@ -1,5 +1,13 @@
 let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0 };
 
+const MANAGER_MSGS = [
+  'Welkom bij Y2K Boutique! Ik ben Belle, jouw manager. Luister goed naar elke klant en style ze perfect. Hoe beter de match, hoe meer coins je verdient. Succes!',
+  'Goedemorgen! Dag 2 al! Klanten hebben elk een unieke smaak. Retro, glamour, kawaii... lees hun wensen goed voor de perfecte outfit!',
+  'Hey jij! Dag 3 is begonnen. De klanten worden veeleisender. Vertrouw op je gevoel voor stijl en kies slim. Ik geloof in jou!',
+  'Dag 4! Nog steeds aan het werk? Geweldig! Probeer vandaag elke klant een perfecte score te geven. Dat levert de meeste coins op!',
+  'Hoi hoi! Belle hier. Wist je dat accessoires en haar ook punten opleveren? Vergeet ze niet mee te nemen in de outfit!',
+];
+
 function shuffle(arr) {
   const b = [...arr];
   for (let i = b.length - 1; i > 0; i--) {
@@ -15,6 +23,37 @@ function startGame() {
   document.getElementById('startScreen').style.display = 'none';
   G.cOrder = shuffle([0, 1, 2]);
   G.cIdx = 0;
+  showPhoneCall();
+}
+
+function showPhoneCall() {
+  const msg = MANAGER_MSGS[Math.min(G.day - 1, MANAGER_MSGS.length - 1)];
+  document.getElementById('phoneMsg').textContent = 'Binnenkomend gesprek...';
+  document.getElementById('phoneActions').innerHTML =
+    '<button class="phone-btn answer" onclick="answerCall()">Opnemen</button>' +
+    '<button class="phone-btn decline" onclick="dismissCall()">Negeren</button>';
+  const popup = document.getElementById('phoneCall');
+  popup.style.display = 'flex';
+  popup.classList.remove('answered');
+  popup.dataset.msg = msg;
+  SFX.ring();
+}
+
+function answerCall() {
+  SFX.click();
+  SFX.stopRing();
+  const popup = document.getElementById('phoneCall');
+  popup.classList.add('answered');
+  const msg = popup.dataset.msg;
+  document.getElementById('phoneMsg').textContent = msg;
+  document.getElementById('phoneActions').innerHTML =
+    '<button class="phone-btn answer" onclick="dismissCall()">Ophangen</button>';
+}
+
+function dismissCall() {
+  SFX.click();
+  SFX.stopRing();
+  document.getElementById('phoneCall').style.display = 'none';
   loadCustomer();
 }
 
@@ -160,7 +199,7 @@ function continueToNextDay() {
   G.dayScore = 0;
   document.getElementById('dayNum').textContent = G.day;
   document.getElementById('dayOverview').style.display = 'none';
-  loadCustomer();
+  showPhoneCall();
 }
 
 function showTutorial() {

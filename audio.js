@@ -27,11 +27,27 @@ const SFX = (() => {
     bgMusic.play().catch(() => {});
   }
 
+  const ringSound = new Audio('music/telephone-ring.mp3');
+  ringSound.loop = true;
+  ringSound.volume = 0.7;
+
+  function ring() {
+    if (muted) return;
+    ringSound.currentTime = 0;
+    ringSound.play().catch(() => {});
+  }
+
+  function stopRing() {
+    ringSound.pause();
+    ringSound.currentTime = 0;
+  }
+
   function toggle() {
     muted = !muted;
     bgMusic.muted = muted;
+    ringSound.muted = muted;
     document.getElementById('soundBtn').innerHTML = muted ? '&#128263;' : '&#128266;';
   }
 
-  return { click, drop, startBoutique, toggle };
+  return { click, drop, startBoutique, ring, stopRing, toggle };
 })();
