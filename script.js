@@ -8,17 +8,63 @@ const ASSETS = {
   happy3:  'assets/happy3.png',
   normal3: 'assets/normal3.png',
   mad3:    'assets/mad3.png',
-  top:     'assets/top.png',
-  hels:    'assets/hels.png',
-  shoes:   'assets/shoes.png',
-  pants:   'assets/pants.png',
+  // Tops
+  top:                  'assets/top.png',
+  whitetop:             'assets/whitetop.png',
+  whitebluetop:         'assets/whitebluetop.png',
+  bluecutetop:          'assets/bluecutetop.png',
+  yellowtop:            'assets/yellowtop.png',
+  pinktop:              'assets/pinktop.png',
+  pinkjapanesestyletop: 'assets/pinkjapanesestyletop.png',
+  coceqettetop:         'assets/coceqettetop.png',
+  // Broeken & rokken
+  pants:                'assets/pants.png',
+  lightblueflaredjeans: 'assets/lightblueflaredjeans.png',
+  blueskirt:            'assets/blueskirt.png',
+  // Schoenen
+  hels:                 'assets/hels.png',
+  shoes:                'assets/shoes.png',
+  blackcuteshoes:       'assets/blackcuteshoes.png',
+  pinkheelsy2k:         'assets/pinkheelsy2k.png',
+  hellokitysneakers:    'assets/hellokitysneakers.png',
+  // Tassen
+  jeansbag:             'assets/jeansbag.png',
+  blackcrossbodybag:    'assets/blackcrossbodybag.png',
+  // Accessoires
+  pandoracute:          'assets/pandoracute.png',
+  pandoraarmband:       'assets/pandoraarmband.png',
+  sunglasses:           'assets/sunglasses.png',
+  flower:               'assets/flower.png',
 };
 
 const ITEMS = [
-  { id: 'top',   img: ASSETS.top,   name: 'Polo crop top',  cat: 'Top',      tags: ['casual', 'retro', 'chic'] },
-  { id: 'hels',  img: ASSETS.hels,  name: 'Hoge laarzen',   cat: 'Schoenen', tags: ['glamour', 'avond', 'chic'] },
-  { id: 'shoes', img: ASSETS.shoes, name: 'Adidas Gazelle',  cat: 'Schoenen', tags: ['casual', 'retro', 'street'] },
-  { id: 'pants', img: ASSETS.pants, name: 'Y2K flare jeans', cat: 'Broek',    tags: ['retro', 'glamour', 'Y2K'] },
+  // ── Tops ──
+  { id: 'top',                  img: ASSETS.top,                  name: 'Polo crop top',        cat: 'Top',        tags: ['casual', 'retro', 'chic'] },
+  { id: 'whitetop',             img: ASSETS.whitetop,             name: 'Wit basic top',        cat: 'Top',        tags: ['casual', 'chic', 'minimaal'] },
+  { id: 'whitebluetop',         img: ASSETS.whitebluetop,         name: 'White blue top',       cat: 'Top',        tags: ['casual', 'retro', 'street'] },
+  { id: 'bluecutetop',          img: ASSETS.bluecutetop,          name: 'Blauwe cute top',      cat: 'Top',        tags: ['kawaii', 'Y2K', 'casual'] },
+  { id: 'yellowtop',            img: ASSETS.yellowtop,            name: 'Gele top',             cat: 'Top',        tags: ['retro', 'Y2K', 'casual'] },
+  { id: 'pinktop',              img: ASSETS.pinktop,              name: 'Roze top',             cat: 'Top',        tags: ['glamour', 'Y2K', 'kawaii'] },
+  { id: 'pinkjapanesestyletop', img: ASSETS.pinkjapanesestyletop, name: 'Japanese style top',   cat: 'Top',        tags: ['kawaii', 'Y2K', 'chic'] },
+  { id: 'coceqettetop',         img: ASSETS.coceqettetop,         name: 'Coquette top',         cat: 'Top',        tags: ['glamour', 'chic', 'avond'] },
+  // ── Broeken & Rokken ──
+  { id: 'pants',                img: ASSETS.pants,                name: 'Y2K flare jeans',      cat: 'Broek',      tags: ['retro', 'glamour', 'Y2K'] },
+  { id: 'lightblueflaredjeans', img: ASSETS.lightblueflaredjeans, name: 'Light blue flared',    cat: 'Broek',      tags: ['retro', 'casual', 'Y2K'] },
+  { id: 'blueskirt',            img: ASSETS.blueskirt,            name: 'Blauwe rok',           cat: 'Rok',        tags: ['chic', 'casual', 'kawaii'] },
+  // ── Schoenen ──
+  { id: 'hels',                 img: ASSETS.hels,                 name: 'Hoge laarzen',         cat: 'Schoenen',   tags: ['glamour', 'avond', 'chic'] },
+  { id: 'shoes',                img: ASSETS.shoes,                name: 'Adidas Gazelle',        cat: 'Schoenen',   tags: ['casual', 'retro', 'street'] },
+  { id: 'blackcuteshoes',       img: ASSETS.blackcuteshoes,       name: 'Black cute shoes',     cat: 'Schoenen',   tags: ['chic', 'kawaii', 'casual'] },
+  { id: 'pinkheelsy2k',         img: ASSETS.pinkheelsy2k,         name: 'Pink Y2K heels',       cat: 'Schoenen',   tags: ['glamour', 'Y2K', 'avond'] },
+  { id: 'hellokitysneakers',    img: ASSETS.hellokitysneakers,    name: 'Hello Kitty sneakers', cat: 'Schoenen',   tags: ['kawaii', 'casual', 'Y2K'] },
+  // ── Tassen ──
+  { id: 'jeansbag',             img: ASSETS.jeansbag,             name: 'Jeans bag',            cat: 'Tas',        tags: ['casual', 'retro', 'street'] },
+  { id: 'blackcrossbodybag',    img: ASSETS.blackcrossbodybag,    name: 'Black crossbody bag',  cat: 'Tas',        tags: ['chic', 'avond', 'glamour'] },
+  // ── Accessoires ──
+  { id: 'pandoracute',          img: ASSETS.pandoracute,          name: 'Pandora ketting',      cat: 'Accessoire', tags: ['chic', 'glamour', 'kawaii'] },
+  { id: 'pandoraarmband',       img: ASSETS.pandoraarmband,       name: 'Pandora armband',      cat: 'Accessoire', tags: ['chic', 'glamour', 'Y2K'] },
+  { id: 'sunglasses',           img: ASSETS.sunglasses,           name: 'Zonnebril',            cat: 'Accessoire', tags: ['retro', 'Y2K', 'casual'] },
+  { id: 'flower',               img: ASSETS.flower,               name: 'Haar bloem',           cat: 'Accessoire', tags: ['kawaii', 'Y2K', 'casual'] },
 ];
 
 const CUSTOMERS = [
@@ -302,9 +348,12 @@ function renderBagItems() {
   const bagItems = document.getElementById('bagItems');
   bagItems.innerHTML = '';
   const positions = [
-    { top: '5%',  left: '5%'  },
-    { top: '10%', left: '45%' },
-    { top: '45%', left: '20%' },
+    { top: '2%',  left: '2%'  },
+    { top: '5%',  left: '48%' },
+    { top: '38%', left: '5%'  },
+    { top: '42%', left: '48%' },
+    { top: '68%', left: '10%' },
+    { top: '65%', left: '50%' },
   ];
   Object.values(G.outfit).forEach((item, i) => {
     const thumb = document.createElement('img');
