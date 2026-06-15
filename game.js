@@ -64,6 +64,7 @@ function setChar(expr) {
   const c = CUSTOMERS[G.cOrder[G.cIdx]];
   const img = document.getElementById('charImg');
   img.src = c.imgs[expr];
+  img.style.display = 'block';
   img.className = 'char-img enter';
   setTimeout(() => img.classList.remove('enter'), 400);
 }
@@ -226,6 +227,8 @@ function restartGame() {
   G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0 };
   document.getElementById('coinNum').textContent = '0';
   document.getElementById('dayNum').textContent = '1';
+  document.getElementById('charImg').style.display = 'none';
+  document.getElementById('charImg').src = '';
   document.getElementById('endingScreen').style.display = 'none';
   document.getElementById('startScreen').style.display = 'flex';
 }
