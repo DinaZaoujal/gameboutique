@@ -190,7 +190,7 @@ const CUSTOMERS = [
   },
 ];
 
-let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null };
+let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0 };
 
 // â”€â”€ AUDIO â”€â”€
 const SFX = (() => {
@@ -468,6 +468,8 @@ function submitOutfit() {
     reaction = 'slecht';
   }
   G.coins += earned;
+  G.dayCoins += earned;
+  G.dayScore += reaction === 'perfect' ? 3 : reaction === 'goed' ? 1 : 0;
   document.getElementById('coinNum').textContent = G.coins;
   setChar(expr);
   document.getElementById('wardrobePanel').style.display = 'none';
@@ -504,11 +506,30 @@ function submitOutfit() {
 function nextCustomer() {
   G.cIdx++;
   if (G.cIdx >= G.cOrder.length) {
-    G.day++;
-    G.cOrder = shuffle([0, 1, 2]);
-    G.cIdx = 0;
-    document.getElementById('dayNum').textContent = G.day;
+    showDayOverview();
+    return;
   }
+  loadCustomer();
+}
+
+function showDayOverview() {
+  document.getElementById('ovDay').textContent = G.day;
+  document.getElementById('ovCoins').textContent = G.dayCoins + ' coins';
+  document.getElementById('ovScore').textContent = G.dayScore + ' / 9';
+  document.getElementById('dayOverview').style.display = 'flex';
+  document.getElementById('wardrobePanel').style.display = 'none';
+  document.getElementById('sceneBg').className = 'scene-bg';
+}
+
+function continueToNextDay() {
+  SFX.click();
+  G.day++;
+  G.cOrder = shuffle([0, 1, 2]);
+  G.cIdx = 0;
+  G.dayCoins = 0;
+  G.dayScore = 0;
+  document.getElementById('dayNum').textContent = G.day;
+  document.getElementById('dayOverview').style.display = 'none';
   loadCustomer();
 }
 

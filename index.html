@@ -52,6 +52,30 @@
     <div class="d-actions" id="dActions"></div>
   </div>
 
+  <!-- Dag overzicht -->
+  <div class="day-overview" id="dayOverview">
+    <div class="day-ov-inner">
+      <div class="day-ov-title">Dag <span id="ovDay">1</span> voorbij!</div>
+      <div class="day-ov-stats">
+        <div class="day-ov-stat">
+          <img src="assets/gameplay/betaalmachine.png" class="day-ov-icon" alt="betaalmachine">
+          <div class="day-ov-info">
+            <div class="day-ov-label">Winst vandaag</div>
+            <div class="day-ov-val" id="ovCoins">0 coins</div>
+          </div>
+        </div>
+        <div class="day-ov-stat">
+          <img src="assets/gameplay/goldenstar.png" class="day-ov-icon" alt="punten">
+          <div class="day-ov-info">
+            <div class="day-ov-label">Punten</div>
+            <div class="day-ov-val" id="ovScore">0 / 9</div>
+          </div>
+        </div>
+      </div>
+      <button class="start-btn" onclick="continueToNextDay()">Volgende dag ></button>
+    </div>
+  </div>
+
   <!-- Garderobe -->
   <div class="wardrobe" id="wardrobePanel">
     <div class="wrd-top">
