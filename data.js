@@ -1,4 +1,12 @@
 const ASSETS = {
+  // Enemy - Cindy
+  enemy_smiles:       'assets/characters/enemy-smiles.png',
+  enemy_mad:          'assets/characters/enemy-mad.png',
+  enemy_rolseye:      'assets/characters/enemy-rolseye.png',
+  enemy_evilsmile:    'assets/characters/enemy-evilsmile.png',
+  enemy_scared:       'assets/characters/enemy scared.png',
+  enemy_nevouslaugh:  'assets/characters/enemy-nevouslaugh.png',
+  enemy_proudlaugh:   'assets/characters/enemy-proudlaugh.png',
   // Manager
   manager_neutral:      'assets/characters/manager-neutral.png',
   manager_blij:         'assets/characters/manager-blij.png',
@@ -195,4 +203,270 @@ const CUSTOMERS = [
       },
     ]
   },
+  {
+    id: 'c4', name: 'Cindy', color: '#9b42b8',
+    isCindy: true,
+    imgs: {
+      normal: 'assets/characters/enemy-smiles.png',
+      happy:  'assets/characters/enemy-evilsmile.png',
+      sad:    'assets/characters/enemy-mad.png'
+    },
+    wish_tags: ['glamour', 'Y2K', 'chic'],
+    scenes: [
+      {
+        phase: 'speciale klant', expr: 'normal', speaker: 'Cindy',
+        text: '*Cindy stapt zelfverzekerd de winkel binnen* Toevallig! Ik ben gewoon... een klant vandaag. Jullie hebben toch iets goeds voor me? Ik zoek iets heel speciaals.',
+        actions: [
+          { lbl: 'Welkom! Wat zoek je?', next: 1 },
+          { lbl: 'Cindy?! Als klant?!', next: 2 }
+        ]
+      },
+      {
+        phase: 'speciale klant', expr: 'normal', speaker: 'Cindy',
+        text: 'Iets glamoureus, Y2K, maar ook chic en elegant. Het allerbeste van jullie collectie. En als jullie me NIET kunnen stylen... bewijst dat alleen dat ik het beter doe.',
+        actions: [{ lbl: 'Uitdaging aanvaard!', next: 3 }]
+      },
+      {
+        phase: 'speciale klant', expr: 'normal', speaker: 'Cindy',
+        text: 'Ja ja, ik ben gewoon een klant! Mag dat niet? Ik wil eens zien of jullie echt zo goed zijn als iedereen zegt. Style me dan, als je durft! *armen over elkaar*',
+        actions: [{ lbl: 'Je zult versteld staan.', next: 3 }]
+      },
+      {
+        phase: 'styling', expr: 'normal', speaker: 'Boutique',
+        text: 'Cindy wil het allerbeste: glamour, Y2K EN chic. Laat zien wat je in je hebt!',
+        actions: [], wardrobe: true
+      }
+    ]
+  },
+];
+
+const CINDY_ENCOUNTERS = {
+  1: [
+    {
+      phase: 'indringer',
+      speaker: 'Boutique',
+      text: '*De voordeur gaat open. Een bekend gezicht stapt met een valse glimlach naar binnen...*',
+      expr: null,
+      actions: [{ lbl: 'Kijk wie we hebben...', next: 1 }]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Heeey! Wat een schattige winkel! Ik liep hier toevallig langs en dacht... ik ga even kijken! Jullie Y2K stijl is zo leuk!',
+      expr: 'enemy_smiles',
+      actions: [
+        { lbl: 'Welkom, kan ik je helpen?', next: 2 },
+        { lbl: 'Cindy?! Wat doe jij hier?', next: 3 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Oh geweldig! Ik zoek gewoon... inspiratie. Welke stijlen lopen goed deze week? Welke kleuren zijn populair? *kijkt gretig rond*',
+      expr: 'enemy_evilsmile',
+      actions: [
+        { lbl: 'Onze stijlen zijn privé.', next: 4 },
+        { lbl: 'Tuurlijk, kijk maar!', next: 5 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Ha! Ja ik ben het! Lang geleden hè? Ik kom gewoon even kijken hoe het gaat met... jullie kleine boutique. *giechelt nerveus*',
+      expr: 'enemy_nevouslaugh',
+      actions: [
+        { lbl: 'Ga weg Cindy, we vertrouwen je niet.', next: 4 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Fine! Ik ga al. Maar wacht maar tot mijn winkel opent... dan zien we wie er echt stijl heeft! *smijt deur dicht*',
+      expr: 'enemy_mad',
+      actions: [],
+      done: true
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*Fotografeert snel de hele collectie* Geweldig! Precies wat ik nodig had! Bedankt voor de gratis inspiratie! Ciao! *sprint weg*',
+      expr: 'enemy_proudlaugh',
+      actions: [],
+      done: true
+    }
+  ],
+  4: [
+    {
+      phase: 'indringer',
+      speaker: 'Boutique',
+      text: '*De deur vliegt open. Cindy stapt naar binnen, zelfverzekerder dan ooit...*',
+      expr: null,
+      actions: [{ lbl: '...', next: 1 }]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Surprise! Mijn nieuwe winkel opent volgende week, net om de hoek! Toeval hè? *knipoogt* Jullie worden mijn concurrentie!',
+      expr: 'enemy_proudlaugh',
+      actions: [
+        { lbl: 'Dat meen je niet.', next: 2 },
+        { lbl: 'Wat wil je nu van ons?', next: 3 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Jawel! En ik heb... heel wat inspiratie opgedaan dankzij jullie. Net als vroeger, Belle en ik samen. Waren dat nog eens tijden... *zucht dramatisch*',
+      expr: 'enemy_evilsmile',
+      actions: [
+        { lbl: 'Die tijd is voorbij Cindy.', next: 4 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Oh niets niets... Ik kom alleen gedag zeggen. *kijkt nerveus rond de winkel* En misschien... nog wat ideetjes opdoen.',
+      expr: 'enemy_nevouslaugh',
+      actions: [
+        { lbl: 'Doe de deur achter je dicht.', next: 4 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*Schrik* Oké oké! Ik ga! Maar jullie gaan dit betreuren! Mijn winkel wordt groter dan Y2K Boutique ooit was! *snelt weg*',
+      expr: 'enemy_scared',
+      actions: [],
+      done: true
+    }
+  ],
+  7: [
+    {
+      phase: 'indringer',
+      speaker: 'Boutique',
+      text: '*De deur gaat open voor de laatste dag. Cindy staat in de deuropening, voor het eerst zonder haar valse glimlach...*',
+      expr: null,
+      actions: [{ lbl: '...', next: 1 }]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Oké... ik geef het toe. Jullie boutique is beter dan ik dacht. Mijn winkel doet het minder goed dan gepland. *kijkt naar de grond*',
+      expr: 'enemy_rolseye',
+      actions: [
+        { lbl: 'Dat verbaast me niks.', next: 2 },
+        { lbl: 'Misschien had je eerlijk moeten zijn.', next: 2 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Ik weet het... Belle en ik hadden het anders kunnen doen. Ik had niet moeten liegen destijds. *pauze* Succes vandaag dan maar. *loopt weg*',
+      expr: 'enemy_nevouslaugh',
+      actions: [],
+      done: true
+    }
+  ]
+};
+
+const CINDY_DROP_INS = [
+  [
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Nog steeds open? Interessant... *kijkt demonstratief op horloge* Hoe lang denken jullie dit vol te houden?',
+      expr: 'enemy_rolseye',
+      actions: [
+        { lbl: 'Zo lang als wij willen.', next: 1 },
+        { lbl: 'Ga gewoon weg Cindy.', next: 1 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*Lacht neerbuigend* Oké oké. Ik heb toch al genoeg gezien. Tot de volgende keer! *wuift en loopt weg*',
+      expr: 'enemy_proudlaugh',
+      actions: [],
+      done: true
+    }
+  ],
+  [
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Hé! Ik kom alleen even zeggen dat mijn winkel het super goed doet! *toont foto\'s op telefoon* Kijk toch eens!',
+      expr: 'enemy_smiles',
+      actions: [
+        { lbl: 'Niet geïnteresseerd.', next: 1 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Jammer! Maar jullie nieuwste stijlen staan al op mijn webshop. Oeps! *knipoogt en loopt weg*',
+      expr: 'enemy_evilsmile',
+      actions: [],
+      done: true
+    }
+  ],
+  [
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*Stapt naar binnen* Oh hoi! Ik was toevallig in de buurt. Zijn er al nieuwe collecties? Gewoon uit... interesse.',
+      expr: 'enemy_nevouslaugh',
+      actions: [
+        { lbl: 'Nee. Dag Cindy.', next: 1 },
+        { lbl: 'Wat ben jij aan het doen?', next: 1 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*Schrik* Niets! Ik doe niets! Ik ga al! *rent struikelend de deur uit*',
+      expr: 'enemy_scared',
+      actions: [],
+      done: true
+    }
+  ],
+  [
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: '*stapt binnen, ziet drukte* Hm! Drukker dan ik dacht. Mijn winkel heeft ook veel klanten hoor! Waarschijnlijk meer! *kijkt scheel*',
+      expr: 'enemy_rolseye',
+      actions: [
+        { lbl: 'Dat betwijfel ik.', next: 1 },
+        { lbl: 'Leuk voor jou Cindy.', next: 1 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Wat wil jij daarmee zeggen?! Mijn winkel is FANTASTISCH! We hebben vorige maand zelfs een... ehm... *kijkt weg* ...actie gehad. Die erg goed ging. *mompelt* Geloof ik. *smijt deur dicht*',
+      expr: 'enemy_nevouslaugh',
+      actions: [],
+      done: true
+    }
+  ],
+  [
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'Hé! Ik zoek eigenlijk een nieuwe styliste voor mijn winkel. Jij lijkt talent te hebben... hoe zou je het vinden om VOOR mij te werken? *glimlacht vals*',
+      expr: 'enemy_smiles',
+      actions: [
+        { lbl: 'Nee dankjewel.', next: 1 },
+        { lbl: 'Absoluut niet.', next: 1 }
+      ]
+    },
+    {
+      phase: 'indringer',
+      speaker: 'Cindy',
+      text: 'FINE! Je weet echt niet wat je mist! Mijn winkel heeft betere... *pauze* ...betere... *zwijgt lang* ...het is gewoon beter oké?! *loopt weg met rode konen*',
+      expr: 'enemy_scared',
+      actions: [],
+      done: true
+    }
+  ]
 ];

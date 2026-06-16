@@ -1,0 +1,77 @@
+.dialogue {
+  background: #fff8fc;
+  border-top: 2px solid #ff79c6;
+  padding: 14px 18px 12px;
+  min-height: 140px;
+}
+
+.speaker {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.dtext {
+  font-size: 16px;
+  font-family: 'Jua', sans-serif;
+  color: #4a1a35;
+  line-height: 1.8;
+  min-height: 56px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 9px;
+  height: 13px;
+  background: #ff79c6;
+  margin-left: 2px;
+  vertical-align: -1px;
+  animation: bl 0.8s step-end infinite;
+}
+
+@keyframes bl {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.d-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.d-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #ff79c6;
+  background: #fce4f3;
+  color: #c2185b;
+  font-family: 'Jua', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.d-btn:hover {
+  background: #ffd0eb;
+  border-color: #ff5ab6;
+  color: #ad1457;
+}
+
+.d-btn.pri {
+  background: #ff79c6;
+  color: #1a0a2e;
+  border-color: #ff79c6;
+}
+
+.d-btn.pri:hover {
+  background: #ff5ab6;
+}
+
+.next-customer-btn {
+  margin-left: auto;
+}

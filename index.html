@@ -8,7 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Jua&family=Kalnia:wght@100..700&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ole&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/hud.css">
+  <link rel="stylesheet" href="css/scene.css">
+  <link rel="stylesheet" href="css/dialogue.css">
+  <link rel="stylesheet" href="css/wardrobe.css">
+  <link rel="stylesheet" href="css/screens.css">
+  <link rel="stylesheet" href="css/manager.css">
 </head>
 <body>
 
@@ -118,7 +124,7 @@
             <div class="tut-num">4</div>
             <div class="tut-text">
               <strong>Verdien coins en punten</strong>
-              Perfecte outfit = 3 punten. Goed = 1 punt. Help 3 klanten per dag!
+              Perfecte outfit = 3 punten. Goed = 1 punt. Verdien 500 coins in 5 dagen!
             </div>
           </div>
         </div>
@@ -152,6 +158,12 @@
         <div class="paper-body" id="paperBody"></div>
       </div>
     </div>
+    <div id="payAnim" class="pay-anim">
+      <img src="assets/gameplay/betaalmachine.png" class="pay-machine-img" alt="">
+      <div class="pay-label">Betaald!</div>
+    </div>
+    <img id="bagFly" class="bag-fly" src="assets/gameplay/pinkshoppingbag.png" alt="">
+    <img id="trashcanEl" class="trashcan-el" src="assets/gameplay/pinktrashcan.png" alt="">
   </div>
 
   <!-- Dialoog -->

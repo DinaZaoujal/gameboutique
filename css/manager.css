@@ -1,0 +1,206 @@
+/* -- SPEAKER WAARSCHUWING -- */
+.speaker-warning {
+  display: none;
+  position: absolute;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 38;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background: #fff3cd;
+  border: 2px solid #e8a000;
+  border-radius: 14px;
+  padding: 10px 18px 10px 10px;
+  box-shadow: 0 4px 16px rgba(232, 160, 0, 0.25);
+  animation: speakerDrop 0.35s ease;
+  min-width: 280px;
+  max-width: 420px;
+}
+
+@keyframes speakerDrop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.speaker-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: speakerShake 0.4s ease 0.1s;
+}
+
+@keyframes speakerShake {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-10deg); }
+  75%       { transform: rotate(10deg); }
+}
+
+.speaker-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.speaker-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #ffef87;
+  letter-spacing: 0.5px;
+}
+
+.speaker-msg {
+  font-size: 11px;
+  color: #5a3e00;
+  line-height: 1.5;
+}
+
+/* -- MANAGER REACTIE BUBBEL -- */
+.manager-bubble {
+  display: none;
+  position: absolute;
+  bottom: 160px;
+  left: 16px;
+  z-index: 35;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+  animation: bubbleIn 0.3s ease;
+}
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bubble-manager-img {
+  width: 64px;
+  height: 80px;
+  object-fit: contain;
+  object-position: top;
+  flex-shrink: 0;
+}
+
+.bubble-text {
+  background: #fff0f8;
+  border: 1.5px solid #ff79c6;
+  border-radius: 14px 14px 14px 2px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: #4a1a35;
+  line-height: 1.6;
+  max-width: 220px;
+  box-shadow: 0 2px 10px rgba(255, 121, 198, 0.2);
+}
+
+/* -- MANAGER TELEFOON -- */
+.phone-call {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: linear-gradient(to top, #fff0f8, #fdf4fb);
+  border-top: 2px solid #ff79c6;
+  padding: 10px 16px 14px;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  box-shadow: 0 -4px 20px rgba(255, 121, 198, 0.2);
+  animation: slideUp 0.35s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.manager-call-img {
+  width: 90px;
+  height: 110px;
+  object-fit: contain;
+  object-position: top;
+  flex-shrink: 0;
+  transition: content 0.2s;
+}
+
+.phone-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.phone-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: phoneWiggle 0.5s ease infinite alternate;
+}
+
+@keyframes phoneWiggle {
+  from { transform: rotate(-8deg); }
+  to   { transform: rotate(8deg);  }
+}
+
+.phone-call.answered .phone-img {
+  animation: none;
+  transform: rotate(0deg);
+}
+
+.phone-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.phone-caller {
+  font-size: 13px;
+  font-weight: 900;
+  color: #c2185b;
+  letter-spacing: 0.5px;
+}
+
+.phone-msg {
+  font-size: 13px;
+  color: #4a1a35;
+  line-height: 1.6;
+  min-height: 36px;
+}
+
+.phone-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.phone-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-family: 'Jua', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.phone-btn.answer {
+  background: #ff79c6;
+  color: #1a0a2e;
+}
+
+.phone-btn.answer:hover { background: #ff5ab6; }
+
+.phone-btn.decline {
+  background: #fce4f3;
+  border: 1.5px solid #ff79c6;
+  color: #c2185b;
+}
+
+.phone-btn.decline:hover { background: #ffd0eb; }

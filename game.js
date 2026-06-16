@@ -1,5 +1,5 @@
-let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0 };
-const TOTAL_DAYS = 7;
+let G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0, cindyEncounter: null, cindyAsCustomer: false, dayMaxScore: 6 };
+const TOTAL_DAYS = 5;
 
 const MANAGER_MSGS = [
   // Dag 1 - welkom
@@ -58,6 +58,14 @@ const MANAGER_REACTIONS = {
     'Belle hier. Ik zag wat er misging. Probeer de stijl van de klant te begrijpen voor je items kiest. Je kan dit!',
     'Au. Dat deed pijn om te zien. Focus je! Lees de dialoog goed en kies items die passen bij de smaak.',
   ],
+  cindy_perfect: [
+    'OH WOW! Zelfs Cindy kan onze stijl niet weerstaan! Bonuspunten!! Jij bent een STER!',
+    'Zie je! Zelfs onze concurrent koopt bij ons! Cindy is stikjaloers en dat is verdiend! GEWELDIG!',
+  ],
+  cindy_slecht: [
+    'Jammer dat Cindy niet tevreden was... maar eerlijk gezegd IS Cindy nooit tevreden! Ga gewoon door!',
+    'Cindy is sowieso onmogelijk te pleasen. Geef niet op -- volgende klant gaat beter!',
+  ],
 };
 
 function shuffle(arr) {
@@ -73,7 +81,10 @@ function startGame() {
   SFX.click();
   SFX.startBoutique();
   document.getElementById('startScreen').style.display = 'none';
-  G.cOrder = shuffle([0, 1, 2]);
+  // Day 1: Cindy always comes as enemy visitor, not as customer
+  G.cindyAsCustomer = false;
+  G.dayMaxScore = 6;
+  G.cOrder = shuffle([0, 1, 2]).slice(0, 2);
   G.cIdx = 0;
   setupPaperDrag();
   showPhoneCall();
@@ -106,7 +117,145 @@ function answerCall() {
     '<button class="phone-btn answer" onclick="dismissCall()">Ophangen</button>';
 }
 
+function getCindyEncounter() {
+  const day = G.day;
+  const maxSoFar = (day - 1) * 9;
+  const ratio = maxSoFar > 0 ? G.totalScore / maxSoFar : 0;
+
+  if (day === 1) return CINDY_ENCOUNTERS[1];
+  // Day 4 & 5: altijd vaste encounter
+  if (day === 4) return CINDY_ENCOUNTERS[4];
+  if (day === 5) return CINDY_ENCOUNTERS[7];
+  // Random drop-in dagen: base 75% + scorebonus tot 95%
+  if (Math.random() < 0.75 + ratio * 0.2) {
+    return CINDY_DROP_INS[Math.floor(Math.random() * CINDY_DROP_INS.length)];
+  }
+  return null;
+}
+
+function shouldCindyBeCustomer() {
+  const day = G.day;
+  if (day === 1) return false;
+  if (day === 3 || day === 5) return true; // altijd klant op dag 3 en 5
+  const maxSoFar = (day - 1) * 9;
+  const ratio = maxSoFar > 0 ? G.totalScore / maxSoFar : 0;
+  return Math.random() < 0.55 + ratio * 0.35;
+}
+
 function dismissCall() {
+  SFX.click();
+  SFX.stopRing();
+  document.getElementById('phoneCall').style.display = 'none';
+  G.cindyEncounter = getCindyEncounter();
+  if (G.day === 3) {
+    // Dag 3: Cindy altijd als klant, geen enemy drop-in
+    G.cindyEncounter = null;
+  } else if (G.day === 5) {
+    // Dag 5: vaste enemy encounter + Cindy ook als klant (beide)
+  } else if (G.cindyEncounter && G.cindyAsCustomer) {
+    // Andere dagen: enemy heeft prioriteit, klantbezoek vervalt
+    G.cindyAsCustomer = false;
+    G.cOrder = shuffle([0, 1, 2]).slice(0, 2);
+    G.dayMaxScore = 6;
+  }
+  if (G.cindyEncounter) {
+    showEnemyScene(0);
+  } else {
+    loadCustomer();
+  }
+}
+
+function showEnemyScene(idx) {
+  const sc = G.cindyEncounter[idx];
+  if (idx === 0) SFX.startEvil();
+
+  document.getElementById('wardrobePanel').style.display = 'none';
+  document.getElementById('managerBubble').style.display = 'none';
+  document.getElementById('dActions').innerHTML = '';
+  document.getElementById('phaseTag').textContent = sc.phase;
+  document.getElementById('speakerName').textContent = sc.speaker;
+  document.getElementById('speakerName').style.color = sc.speaker === 'Cindy' ? '#7b0e8e' : '#da77f2';
+
+  const img = document.getElementById('charImg');
+  if (sc.expr) {
+    img.src = ASSETS[sc.expr];
+    img.style.display = 'block';
+    img.className = 'char-img enter';
+    setTimeout(() => img.classList.remove('enter'), 400);
+  } else {
+    img.style.display = 'none';
+  }
+
+  typeText(sc.text, () => {
+    if (sc.done) {
+      setTimeout(() => endEnemyScene(), 3000);
+      return;
+    }
+    sc.actions.forEach(a => {
+      const btn = document.createElement('button');
+      btn.className = 'd-btn';
+      btn.textContent = a.lbl;
+      btn.onclick = () => { SFX.click(); showEnemyScene(a.next); };
+      document.getElementById('dActions').appendChild(btn);
+    });
+  });
+}
+
+function endEnemyScene() {
+  SFX.stopEvil();
+  document.getElementById('dActions').innerHTML = '';
+  document.getElementById('charImg').style.display = 'none';
+  document.getElementById('speakerName').textContent = 'Boutique';
+  document.getElementById('speakerName').style.color = '#da77f2';
+  document.getElementById('phaseTag').textContent = 'jij';
+
+  const mcLine = G.day === 1
+    ? '*Cindy is weg...* Dat was Cindy. Ze kennen elkaar duidelijk van vroeger. Maar genoeg afleiding — de klanten wachten!'
+    : G.day === 5
+    ? '*Cindy loopt weg...* Dat was... anders dan normaal. Zou ze echt spijt hebben? Hoe dan ook, de winkel wacht!'
+    : '*Cindy is verdwenen...* Laat haar maar. Ze is gewoon jaloers. Terug naar de klanten!';
+
+  typeText(mcLine, () => {
+    const btn = document.createElement('button');
+    btn.className = 'd-btn';
+    btn.textContent = 'Verder >';
+    btn.onclick = () => { SFX.click(); showPostCindyCall(); };
+    document.getElementById('dActions').appendChild(btn);
+  });
+}
+
+const POST_CINDY_MSGS = {
+  1: 'Dat was Cindy... mijn vroegere beste vriendin. We hadden samen een winkel totdat ze ons bedroeg. Maar laat je er niet door afleiden — concentreer je op de klanten!',
+  5: 'Wow, Cindy leek bijna spijt te hebben! Misschien groeit ze toch nog. Maar focus nu — het is de allerlaatste dag. Geef alles wat je hebt!',
+};
+const POST_CINDY_MSG_DEFAULT = 'Laat Cindy maar, ze is gewoon jaloers op wat we hier opbouwen! Concentreer je op de volgende klant!';
+
+function showPostCindyCall() {
+  const msg = POST_CINDY_MSGS[G.day] || POST_CINDY_MSG_DEFAULT;
+  document.getElementById('phoneMsg').textContent = 'Binnenkomend gesprek...';
+  document.getElementById('managerCallImg').src = G.day === 5 ? ASSETS.manager_tevreden : ASSETS.manager_blij;
+  document.getElementById('phoneActions').innerHTML =
+    '<button class="phone-btn answer" onclick="answerPostCindyCall()">Opnemen</button>' +
+    '<button class="phone-btn decline" onclick="dismissPostCindyCall()">Negeren</button>';
+  const popup = document.getElementById('phoneCall');
+  popup.style.display = 'flex';
+  popup.classList.remove('answered');
+  popup.dataset.msg = msg;
+  SFX.ring();
+}
+
+function answerPostCindyCall() {
+  SFX.click();
+  SFX.stopRing();
+  const popup = document.getElementById('phoneCall');
+  popup.classList.add('answered');
+  document.getElementById('managerCallImg').src = G.day === 5 ? ASSETS.manager_tevreden : ASSETS.manager_blij;
+  document.getElementById('phoneMsg').textContent = popup.dataset.msg;
+  document.getElementById('phoneActions').innerHTML =
+    '<button class="phone-btn answer" onclick="dismissPostCindyCall()">Ophangen</button>';
+}
+
+function dismissPostCindyCall() {
   SFX.click();
   SFX.stopRing();
   document.getElementById('phoneCall').style.display = 'none';
@@ -180,8 +329,48 @@ function typeText(txt, cb) {
   }, 20);
 }
 
+function playResultAnim(reaction) {
+  const payEl   = document.getElementById('payAnim');
+  const bagEl   = document.getElementById('bagFly');
+  const trashEl = document.getElementById('trashcanEl');
+  payEl.classList.remove('active');
+  bagEl.className = 'bag-fly';
+  bagEl.style.cssText = '';
+  trashEl.classList.remove('active');
+  trashEl.style.display = 'none';
+
+  if (reaction !== 'slecht') {
+    payEl.classList.add('active');
+    setTimeout(() => {
+      bagEl.style.bottom = '75px';
+      bagEl.style.left = '32%';
+      bagEl.classList.add('fly-good');
+      setTimeout(() => {
+        bagEl.className = 'bag-fly';
+        bagEl.style.cssText = '';
+      }, 1200);
+    }, 650);
+    setTimeout(() => payEl.classList.remove('active'), 2500);
+  } else {
+    trashEl.style.display = '';
+    trashEl.classList.add('active');
+    setTimeout(() => {
+      bagEl.style.bottom = '85px';
+      bagEl.style.left = '28%';
+      bagEl.classList.add('fly-bad');
+      setTimeout(() => {
+        bagEl.className = 'bag-fly';
+        bagEl.style.cssText = '';
+        trashEl.classList.remove('active');
+        trashEl.style.display = 'none';
+      }, 1200);
+    }, 250);
+  }
+}
+
 function submitOutfit() {
   const c = CUSTOMERS[G.cOrder[G.cIdx]];
+  const isCindyCustomer = !!c.isCindy;
   const items = Object.values(G.outfit);
   if (items.length < 1) { showFeedback('Voeg items toe!', '#ffd700'); return; }
   const wish = c.wish_tags;
@@ -198,7 +387,12 @@ function submitOutfit() {
     expr = 'sad';
     reaction = 'slecht';
   }
-  const pts = reaction === 'perfect' ? 3 : reaction === 'goed' ? 1 : 0;
+  let pts = reaction === 'perfect' ? 3 : reaction === 'goed' ? 1 : 0;
+  // Cindy customer bonus: perfect = +2 extra pts (5 total) + bonus coins
+  if (isCindyCustomer && reaction === 'perfect') {
+    pts += 2;
+    earned += 30;
+  }
   G.coins += earned;
   G.dayCoins += earned;
   G.dayScore += pts;
@@ -207,17 +401,35 @@ function submitOutfit() {
   setChar(expr);
   document.getElementById('wardrobePanel').style.display = 'none';
   document.getElementById('dActions').innerHTML = '';
-  document.getElementById('phaseTag').textContent = reaction === 'perfect' ? 'Perfect!' : reaction === 'goed' ? 'Goed!' : 'Helaas...';
+  let phaseLabel;
+  if (isCindyCustomer && reaction === 'perfect') phaseLabel = 'Cindy is JALOERS! ★';
+  else if (reaction === 'perfect') phaseLabel = 'Perfect!';
+  else if (reaction === 'goed') phaseLabel = 'Goed!';
+  else phaseLabel = 'Helaas...';
+  document.getElementById('phaseTag').textContent = phaseLabel;
   document.getElementById('speakerName').textContent = c.name;
   document.getElementById('speakerName').style.color = c.color;
-  const lines = {
+  const lines = isCindyCustomer ? {
     perfect: [
-      'OH WOW! Dit is exact wat ik zocht! Ik ben zo blij! Jij bent echt geweldig!',
-      'YES! Perfecte match! Jij snapt mijn stijl compleet. Ik kom hier altijd terug!'
+      'UGH! Dit is... eigenlijk best goed. Maar ik geef het NOOIT toe! *pakt outfit knarsetandend en betaalt*',
+      'Hmm... dit is exact mijn stijl. Maar dat zeg ik niet hardop! *betaalt geïrriteerd en stormt weg*'
     ],
     goed: [
-      'Oh nice, dit is wel leuk! Niet precies wat ik had gedacht maar ik vind het wel mooi!',
-      'Hmm okie, het is best cute. Ik neem het mee! Volgende keer iets meer pit graag.'
+      'Het is... oké. Niet slecht maar ook niet perfect. Ik had beter verwacht. *rolt met ogen maar pakt outfit*',
+      'Hmm... niet helemaal mijn stijl maar ik neem het mee. Volgende keer beter hè. *zucht diep*'
+    ],
+    slecht: [
+      'ZIE JE! Jullie hebben helemaal geen stijl! Dit is verschrikkelijk! *loopt minachtend weg*',
+      'Precies wat ik dacht. Totaal geen gevoel voor mode. Mijn winkel is honderd keer beter!'
+    ]
+  } : {
+    perfect: [
+      'Dankjewel!! OH WOW! Dit is exact wat ik zocht! Jij bent echt geweldig!',
+      'Dankjewel!! YES! Perfecte match! Jij snapt mijn stijl compleet. Ik kom terug!'
+    ],
+    goed: [
+      'Dankje! Oh nice, dit is wel leuk! Niet precies wat ik had gedacht maar ik neem het mee.',
+      'Dankje! Hmm okie, het is best cute. Ik neem het! Volgende keer iets meer pit graag.'
     ],
     slecht: [
       'Ehm... dit is echt niet mijn stijl. Ik denk dat ik ergens anders ga kijken. Sorry.',
@@ -226,19 +438,33 @@ function submitOutfit() {
   };
   const txt = lines[reaction][Math.floor(Math.random() * 2)];
   hidePaperNote();
-  if (earned > 0) showFeedback('+' + earned + ' coins!', '#ffd700');
-  if (reaction === 'slecht') {
-    setTimeout(() => showSpeakerWarning(), 700);
-    setTimeout(() => showManagerReaction(reaction), 5200);
-  } else {
-    setTimeout(() => showManagerReaction(reaction), 1800);
+  if (isCindyCustomer && reaction === 'perfect') {
+    showFeedback('+' + earned + ' coins! +5 punten!', '#7b0e8e');
+  } else if (earned > 0) {
+    showFeedback('+' + earned + ' coins!', '#ffd700');
   }
+  playResultAnim(reaction);
+  const managerKey = isCindyCustomer
+    ? (reaction === 'perfect' ? 'cindy_perfect' : reaction === 'goed' ? 'goed' : 'cindy_slecht')
+    : reaction;
   typeText(txt, () => {
-    const btn = document.createElement('button');
-    btn.className = 'd-btn pri next-customer-btn';
-    btn.textContent = 'Volgende klant >';
-    btn.onclick = () => { SFX.click(); nextCustomer(); };
-    document.getElementById('dActions').appendChild(btn);
+    const verder = document.createElement('button');
+    verder.className = 'd-btn';
+    verder.textContent = 'Verder >';
+    verder.onclick = () => {
+      SFX.click();
+      document.getElementById('dActions').innerHTML = '';
+      if (reaction === 'slecht') showSpeakerWarning();
+      showManagerReaction(managerKey);
+      setTimeout(() => {
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'd-btn pri next-customer-btn';
+        nextBtn.textContent = 'Volgende klant >';
+        nextBtn.onclick = () => { SFX.click(); nextCustomer(); };
+        document.getElementById('dActions').appendChild(nextBtn);
+      }, 1800);
+    };
+    document.getElementById('dActions').appendChild(verder);
   });
   G.outfit = {};
 }
@@ -259,7 +485,7 @@ function showDayOverview() {
   }
   document.getElementById('ovDay').textContent = G.day;
   document.getElementById('ovCoins').textContent = G.dayCoins + ' coins';
-  document.getElementById('ovScore').textContent = G.dayScore + ' / 9';
+  document.getElementById('ovScore').textContent = G.dayScore + ' / ' + G.dayMaxScore;
   let managerExpr;
   if (G.dayScore >= 7)      managerExpr = ASSETS.manager_blij;
   else if (G.dayScore >= 4) managerExpr = ASSETS.manager_tevreden;
@@ -272,14 +498,14 @@ function showDayOverview() {
 }
 
 function showEnding() {
-  const maxScore = TOTAL_DAYS * 9;
-  const promoted = G.totalScore >= 35;
+  const maxScore = TOTAL_DAYS * 6;
+  const promoted = G.coins >= 500;
   document.getElementById('endingManagerImg').src = promoted ? ASSETS.manager_blij : ASSETS.manager_boos;
   document.getElementById('endingTitle').textContent = promoted ? 'Gefeliciteerd! Je bent gepromoveerd!' : 'Helaas... Je bent ontslagen.';
   document.getElementById('endingTitle').style.color = promoted ? '#c2185b' : '#8b0000';
   document.getElementById('endingMsg').textContent = promoted
-    ? 'Belle is super trots op jou! Met ' + G.totalScore + ' / ' + maxScore + ' punten en ' + G.coins + ' coins heb je bewezen dat jij de beste stylist bent. Welkom als hoofdstylist!'
-    : 'Met ' + G.totalScore + ' / ' + maxScore + ' punten en ' + G.coins + ' coins was het helaas niet genoeg. Belle moest een moeilijke beslissing nemen. Probeer het opnieuw!';
+    ? 'Belle is super trots op jou! Met ' + G.coins + ' coins verdiend en ' + G.totalScore + ' / ' + maxScore + ' punten heb je bewezen dat jij de beste stylist bent. Welkom als hoofdstylist!'
+    : 'Met slechts ' + G.coins + ' coins verdiend was het helaas niet genoeg. Je hebt minimaal 500 coins nodig. Belle moest een moeilijke beslissing nemen. Probeer het opnieuw!';
   document.getElementById('endingScore').textContent = G.totalScore + ' / ' + maxScore + ' punten';
   document.getElementById('endingCoins').textContent = G.coins + ' coins verdiend';
   document.getElementById('endingScreen').style.display = 'flex';
@@ -289,7 +515,7 @@ function showEnding() {
 
 function restartGame() {
   SFX.click();
-  G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0 };
+  G = { coins: 0, day: 1, cOrder: [], cIdx: 0, outfit: {}, typeTimer: null, dayCoins: 0, dayScore: 0, totalScore: 0, cindyEncounter: null, cindyAsCustomer: false, dayMaxScore: 6 };
   document.getElementById('coinNum').textContent = '0';
   document.getElementById('dayNum').textContent = '1';
   document.getElementById('charImg').style.display = 'none';
@@ -301,7 +527,10 @@ function restartGame() {
 function continueToNextDay() {
   SFX.click();
   G.day++;
-  G.cOrder = shuffle([0, 1, 2]);
+  G.cindyAsCustomer = shouldCindyBeCustomer();
+  G.dayMaxScore = G.cindyAsCustomer ? 11 : 6;
+  // 2 reguliere klanten + Cindy als bonus als ze als klant komt
+  G.cOrder = G.cindyAsCustomer ? [...shuffle([0, 1, 2]).slice(0, 2), 3] : shuffle([0, 1, 2]).slice(0, 2);
   G.cIdx = 0;
   G.dayCoins = 0;
   G.dayScore = 0;
@@ -439,3 +668,20 @@ function showFeedback(msg, color) {
   el.textContent = msg;
   el.className = 'feedback-pop show';
 }
+
+function scaleGame() {
+  const game = document.getElementById('game');
+  const scale = Math.min(1, window.innerWidth / 704);
+  if (scale < 1) {
+    game.style.transform = `scale(${scale})`;
+    game.style.transformOrigin = 'top center';
+    game.style.marginBottom = `${Math.round((scale - 1) * game.offsetHeight)}px`;
+    game.style.marginTop = '0';
+  } else {
+    game.style.transform = '';
+    game.style.marginBottom = '';
+    game.style.marginTop = '';
+  }
+}
+scaleGame();
+window.addEventListener('resize', scaleGame);

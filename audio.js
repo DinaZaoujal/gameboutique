@@ -42,12 +42,30 @@ const SFX = (() => {
     ringSound.currentTime = 0;
   }
 
+  const evilMusic = new Audio('music/enemy.mp3');
+  evilMusic.loop = true;
+  evilMusic.volume = 0.6;
+
+  function startEvil() {
+    bgMusic.pause();
+    evilMusic.muted = muted;
+    evilMusic.currentTime = 0;
+    evilMusic.play().catch(() => {});
+  }
+
+  function stopEvil() {
+    evilMusic.pause();
+    evilMusic.currentTime = 0;
+    bgMusic.play().catch(() => {});
+  }
+
   function toggle() {
     muted = !muted;
     bgMusic.muted = muted;
     ringSound.muted = muted;
+    evilMusic.muted = muted;
     document.getElementById('soundBtn').innerHTML = muted ? '&#128263;' : '&#128266;';
   }
 
-  return { click, drop, startBoutique, ring, stopRing, toggle };
+  return { click, drop, startBoutique, ring, stopRing, startEvil, stopEvil, toggle };
 })();
